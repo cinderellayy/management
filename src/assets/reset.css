@@ -1,0 +1,128 @@
+body {
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+    font-size: 0.2rem;
+    padding: 0;
+    margin: 0;
+    font-family: "微软雅黑";
+    /*font-family: "MenkSoft";*/
+    background: #fff;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+div,
+input,
+button,
+textarea,
+span,
+small,
+big,
+p,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+em,
+font,
+img,
+q,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+section,
+article,
+header,
+footer,
+aside,
+nav {
+    padding: 0;
+    margin: 0;
+    list-style: none
+}
+
+section,
+article,
+header,
+footer,
+aside,
+nav {
+    padding: 0;
+    margin: 0;
+    display: block
+}
+
+input,
+select,
+button,
+textarea {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    font-family: \5FAE\8F6F\96C5\9ED1
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+    -webkit-appearance: none;
+    cursor: pointer
+}
+
+img {
+    border: none
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+.color-title {
+    color: #319EEB;
+}
+.color-blue {
+    color: #1824E3;
+}
+.mr8 {
+    margin-right:8px;
+}
+.w100 {
+    width: 100px !important;
+}
