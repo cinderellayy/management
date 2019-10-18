@@ -12,48 +12,53 @@
     <div class="left-content">
       <div class="left-title">功能菜单</div>
       <div class="left-detail">
-        <p class="list-title">系统菜单</p>
-        <div class="list-unit">
-          <p>
-            <img src="../assets/folder1.jpg" class="folder-icon" /> 用户中心
-          </p>
-          <ul>
-            <li class="unit-active">
-              <img src="../assets/document_note.png" class="document-icon" /> 用户管理
-            </li>
-            <li>
-              <img src="../assets/document_note.png" class="document-icon" /> 卖家管理
-            </li>
-            <li>
-              <img src="../assets/document_note.png" class="document-icon" /> 商铺管理
-            </li>
-            <li>
-              <img src="../assets/document_note.png" class="document-icon" /> 任务审核
-            </li>
-          </ul>
-        </div>
-        <div class="list-unit">
-          <p>
-            <img src="../assets/folder1.jpg" class="folder-icon" /> 商家辅助
-          </p>
-          <ul>
-            <li>
-              <img src="../assets/document_note.png" class="document-icon" /> 未接监控
-            </li>
-            <li>
-              <img src="../assets/document_note.png" class="document-icon" /> 未接跟踪
-            </li>
-          </ul>
-        </div>
-        <div class="list-unit">
-          <p>
-            <img src="../assets/folder1.jpg" class="folder-icon" /> 数据分析
-          </p>
-          <ul>
-            <li>
-              <img src="../assets/document_note.png" class="document-icon" /> 单量日报
-            </li>
-          </ul>
+        <p class="list-title" @click="showMenu=!showMenu">
+          系统菜单
+          <img src="../assets/menu.jpg" class="folder-icon right" />
+        </p>
+        <div v-show="showMenu==true">
+          <div class="list-unit">
+            <p @click="showList('showUser')">
+              <img src="../assets/folder1.jpg" class="folder-icon" /> 用户中心
+            </p>
+            <ul v-show="showUser==true">
+              <li :class="{'unit-active':listUnit==1}" @click="listUnit=1">
+                <img src="../assets/document_note.png" class="document-icon" /> 用户管理
+              </li>
+              <li :class="{'unit-active':listUnit==2}" @click="listUnit=2">
+                <img src="../assets/document_note.png" class="document-icon" /> 卖家管理
+              </li>
+              <li :class="{'unit-active':listUnit==3}" @click="listUnit=3">
+                <img src="../assets/document_note.png" class="document-icon" /> 商铺管理
+              </li>
+              <li :class="{'unit-active':listUnit==4}" @click="listUnit=4">
+                <img src="../assets/document_note.png" class="document-icon" /> 任务审核
+              </li>
+            </ul>
+          </div>
+          <div class="list-unit">
+            <p @click="showList('showShop')">
+              <img src="../assets/folder1.jpg" class="folder-icon" /> 商家辅助
+            </p>
+            <ul v-show="showShop==true">
+              <li :class="{'unit-active':listUnit==5}" @click="listUnit=5">
+                <img src="../assets/document_note.png" class="document-icon" /> 未接监控
+              </li>
+              <li :class="{'unit-active':listUnit==6}" @click="listUnit=6">
+                <img src="../assets/document_note.png" class="document-icon" /> 未接跟踪
+              </li>
+            </ul>
+          </div>
+          <div class="list-unit">
+            <p  @click="showList('showData')">
+              <img src="../assets/folder1.jpg" class="folder-icon" /> 数据分析
+            </p>
+            <ul v-show="showData===true">
+              <li :class="{'unit-active':listUnit==7}" @click="listUnit=7">
+                <img src="../assets/document_note.png" class="document-icon" /> 单量日报
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -218,6 +223,13 @@ export default {
   name: "management",
   data() {
     return {
+      showMenu: false,
+      showUser: false,
+      showShop: false,
+      showData: false,
+      listUnit: 1,
+      listUnit1: 5,
+      listUnit2: 7,
       data: [],
       columns: []
     };
@@ -317,6 +329,29 @@ export default {
     this.cacheData = this.data.map(item => ({ ...item }));
   },
   methods: {
+    showList(param){
+       if(param == 'showUser'){
+         this.showUser=!this.showUser;
+         if(this.showUser==true){
+         this.listUnit = 1;
+       }
+       }
+       if(param == 'showShop'){
+         this.showShop=!this.showShop;
+         if(this.showShop==true){
+         this.listUnit = 5;
+       }
+       }
+       if(param == 'showData'){
+         this.showData=!this.showData;
+          if(this.showData==true){
+         this.listUnit= 7;
+       }
+       }
+       
+       
+      
+    },
     callback(key) {
       console.log(key);
     },
@@ -374,10 +409,19 @@ export default {
   height: 34px;
   line-height: 34px;
   border-bottom: 0;
+  cursor: pointer;
 }
-
+.list-title img {
+  margin-top: 9px;
+  /* width: 17px; */
+  margin-right: 9px;
+}
+.list-unit {
+  cursor: pointer;
+}
 .list-unit li {
   padding-left: 20px;
+  cursor: pointer;
 }
 .left-detail p,
 .left-detail li {
@@ -394,7 +438,7 @@ li.unit-active {
 }
 .right-content2-top .top-span {
   text-align: right;
-  width: 60px;
+  width: 66px;
   display: inline-block;
   margin-right: 4px;
 }
