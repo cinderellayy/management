@@ -1,0 +1,189 @@
+.management {
+  height: 100%;
+  border-bottom: 1px solid #8ab3e1;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.top {
+  margin: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+}
+
+.top-title {
+  float: left;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* .folder-icon {
+    width: 16px;
+  } */
+
+.document-icon {
+  width: 10px;
+}
+
+.left-content {
+  float: left;
+  width: 200px;
+  text-indent: 6px;
+  position: absolute;
+  height: 743px;
+  overflow-y: auto;
+}
+
+
+.left-title {
+  background: #e5f0fe;
+  height: 40px;
+  line-height: 40px;
+  position: fixed;
+  width: 200px;
+  margin-bottom: 40px;
+}
+
+.left-content .list-title {
+  background: #ffe398;
+  height: 34px;
+  line-height: 34px;
+  border-bottom: 0;
+  cursor: pointer;
+}
+
+.list-title img {
+  margin-top: 9px;
+  /* width: 17px; */
+  margin-right: 9px;
+}
+
+.list-unit {
+  cursor: pointer;
+}
+
+.list-unit li {
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.left-detail p, .left-detail li {
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px dashed #8ab3e1;
+  padding-left: 10px;
+}
+
+.unit-active {
+  padding-left: 24px;
+  background: #ffe398;
+}
+
+.right-content2-top td {
+  padding-bottom: 10px;
+}
+
+.right-content2-top .top-span {
+  text-align: right;
+  width: 66px;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.ant-tabs-bar {
+  background: #e5f0fe !important;
+  border-bottom: 1px solid #ceddef;
+  margin-bottom: 0 !important;
+  padding: 8px 0 0 0;
+}
+
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+  margin-left: 10px;
+}
+
+.ant-input-affix-wrapper, .ant-select {
+  width: 60% !important;
+}
+
+.right-content {
+  border-left: 1px solid #bdd7f9;
+  margin-left: 200px;
+  height: 750px;
+  overflow-y: auto;
+}
+
+.right-content2 {
+  background-color: #f4f4f4;
+  padding: 14px 20px;
+}
+
+.ant-table-wrapper {
+  background-color: #fff;
+}
+
+.ant-calendar-picker {
+  width: 80%;
+}
+
+.ant-table-thead>tr>th, .ant-table-tbody>tr>td {
+  padding: 8px 16px !important;
+}
+
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-nav-container {
+  height: 32px !important;
+}
+
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+  line-height: 30px !important;
+}
+
+.table-shenhe {
+  color: #18aeff;
+  border-bottom: 1px solid #18aeff;
+}
+
+.ant-btn-primary {
+  margin-right: 20px;
+  background-color: #319eeb !important;
+  border-color: #319eeb !important;
+}
+
+.h600 {
+  min-height: 600px;
+}
+
+.arrow-icon {
+  margin-top: 9px;
+  float: right;
+  margin-right: 9px;
+}
+
+.anticon {
+  margin-right: 6px;
+  margin-left: -6px;
+}
+
+.bottom-content {
+  border-bottom: 1px solid #bdd7f9;
+}
+/* 管理员 */
+.guanliyuan-top {
+  border: 1px solid #e8e8e8;
+  padding: 20px 10px;
+  background: #fafafa;
+}
+/* 角色管理 */
+.juese-delete {
+  position: absolute;
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+}
+/* 菜单管理 */
+.caidan-search{
+  float: right;
+    margin-right: 18%;
+}

@@ -5,7 +5,8 @@ import App from './App'
 import router from './router'
 import ant from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
-import '@/assets/reset.css'
+import '@/assets/css/reset.css'
+import '@/assets/css/style.css'
 
 Vue.use(ant)
 Vue.config.productionTip = false

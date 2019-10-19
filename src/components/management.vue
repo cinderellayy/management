@@ -9,218 +9,177 @@
         <span>欢迎您!</span>
       </p>
     </div>
-    <div class="left-content">
+    <div class="left-content scroll">
       <div class="left-title">功能菜单</div>
-      <div class="left-detail">
+      <div class="left-detail mt40">
         <p class="list-title" @click="showMenu=!showMenu">
           系统菜单
-          <img src="../assets/menu.jpg" class="folder-icon right" />
+          <img src="../assets/img/menu.jpg" class="folder-icon right" />
         </p>
         <div v-show="showMenu==true">
+          <!-- 首页管理员 -->
           <div class="list-unit">
+            <p :class="{'unit-active':listUnit=='index'}" @click="listUnit='index';add('首页')">
+              <a-icon type="home" />首页
+            </p>
+            <p :class="{'unit-active':listUnit=='管理员'}" @click="listUnit='管理员';add('管理员')">
+              <a-icon type="team" />管理员
+            </p>
+          </div>
+          <!-- 权限和菜单 -->
+          <div class="list-unit">
+            <p @click="showSetting=!showSetting">
+              <a-icon type="setting" />权限和菜单
+              <a-icon type="caret-down" class="arrow-icon" />
+            </p>
+            <ul v-show="showSetting==true">
+              <li :class="{'unit-active':listUnit=='角色管理'}" class="pl30" @click="listUnit='角色管理';add('角色管理')">
+                <a-icon type="team" />角色管理
+              </li>
+              <li  class="pl30" @click="showQuanxian=!showQuanxian">
+                <a-icon type="appstore" />权限管理
+                <a-icon type="caret-down" class="arrow-icon" />
+              </li>
+              <ul v-show="showQuanxian==true">
+                <li :class="{'unit-active':listUnit=='权限管理'}" class="pl50" @click="listUnit='权限管理';add('权限管理')">权限管理</li>
+                <li :class="{'unit-active':listUnit=='用户权限管理'}" class="pl50" @click="listUnit='用户权限管理';add('用户权限管理')">用户权限管理</li>
+                <li :class="{'unit-active':listUnit=='角色权限管理'}" class="pl50" @click="listUnit='角色权限管理';add('角色权限管理')">角色权限管理</li>
+              </ul>
+              <li :class="{'unit-active':listUnit=='菜单管理'}" class="pl30" @click="listUnit='菜单管理';add('菜单管理')">
+                <a-icon type="form" />菜单管理
+              </li>
+            </ul>
+          </div>
+
+          <!-- 代码生成以及下面一级菜单 -->
+          <div class="list-unit">
+            <p :class="{'unit-active':listUnit=='代码生成'}" @click="listUnit='代码生成';add('代码生成')">代码生成</p>
+            <p :class="{'unit-active':listUnit=='提现管理'}" @click="listUnit='提现管理';add('提现管理')">提现管理</p>
+            <p :class="{'unit-active':listUnit=='系统设置'}" @click="listUnit='系统设置';add('系统设置')">系统设置</p>
+            <p :class="{'unit-active':listUnit=='系统消息'}" @click="listUnit='系统消息';add('系统消息')">系统消息</p>
+            <p :class="{'unit-active':listUnit=='卖家管理'}" @click="listUnit='卖家管理';add('卖家管理')">卖家管理</p>
+            <p
+              :class="{'unit-active':listUnit=='黑名单管理'}"
+              @click="listUnit='黑名单管理';add('黑名单管理')"
+            >黑名单管理</p>
+            <p :class="{'unit-active':listUnit=='团队设置'}" @click="listUnit='团队设置';add('团队设置')">团队设置</p>
+            <p :class="{'unit-active':listUnit=='我的团队'}" @click="listUnit='我的团队';add('我的团队')">我的团队</p>
+          </div>
+          <!-- 数据统计 -->
+          <div class="list-unit">
+            <p :class="{'unit-active':listUnit=='数据统计'}" @click="showDataMsg=!showDataMsg">
+              <a-icon type="setting" />数据统计
+              <a-icon type="caret-down" class="arrow-icon" />
+            </p>
+            <ul v-show="showDataMsg==true">
+              <li
+                :class="{'unit-active':listUnit=='单量统计'}"
+                @click="listUnit='单量统计';add('单量统计')"
+              >单量统计</li>
+              <li
+                :class="{'unit-active':listUnit=='数据统计'}"
+                @click="listUnit='数据统计';add('数据统计')"
+              >数据统计</li>
+              <li
+                :class="{'unit-active':listUnit=='资金统计'}"
+                @click="listUnit='资金统计';add('资金统计')"
+              >资金统计</li>
+              <li
+                :class="{'unit-active':listUnit=='分站统计'}"
+                @click="listUnit='分站统计';add('分站统计')"
+              >分站统计</li>
+            </ul>
+          </div>
+          <!-- 账号信息以及下面一级菜单 -->
+          <div class="list-unit">
+            <p :class="{'unit-active':listUnit=='账号信息'}" @click="listUnit='账号信息';add('账号信息')">账号信息</p>
+            <p :class="{'unit-active':listUnit=='骗子库'}" @click="listUnit='骗子库';add('骗子库')">骗子库</p>
+            <p :class="{'unit-active':listUnit=='分站管理'}" @click="listUnit='分站管理';add('分站管理')">分站管理</p>
+            <p :class="{'unit-active':listUnit=='申诉中心'}" @click="listUnit='申诉中心';add('申诉中心')">申诉中心</p>
+            <p :class="{'unit-active':listUnit=='银行管理'}" @click="listUnit='银行管理';add('银行管理')">银行管理</p>
+            <p
+              :class="{'unit-active':listUnit=='佣金明细管理'}"
+              @click="listUnit='佣金明细管理';add('佣金明细管理')"
+            >佣金明细管理</p>
+            <p :class="{'unit-active':listUnit=='店铺管理'}" @click="listUnit='店铺管理';add('店铺管理')">店铺管理</p>
+            <p :class="{'unit-active':listUnit=='订单管理'}" @click="listUnit='订单管理';add('订单管理')">订单管理</p>
+            <p :class="{'unit-active':listUnit=='充值管理'}" @click="listUnit='充值管理';add('充值管理')">充值管理</p>
+            <p :class="{'unit-active':listUnit=='任务管理'}" @click="listUnit='任务管理';add('任务管理')">任务管理</p>
+            <p :class="{'unit-active':listUnit=='用户管理'}" @click="listUnit='用户管理';add('用户管理')">用户管理</p>
+          </div>
+          <!-- <div class="list-unit">
             <p @click="showList('showUser')">
-              <img src="../assets/folder1.jpg" class="folder-icon" /> 用户中心
+              <img src="../assets/img/folder1.jpg" class="folder-icon" /> 用户中心
             </p>
             <ul v-show="showUser==true">
               <li :class="{'unit-active':listUnit==1}" @click="listUnit=1;add('用户管理')">
-                <img src="../assets/document_note.png" class="document-icon" /> 用户管理
+                <img src="../assets/img/document_note.png" class="document-icon" /> 用户管理
               </li>
               <li :class="{'unit-active':listUnit==2}" @click="listUnit=2;add('卖家管理')">
-                <img src="../assets/document_note.png" class="document-icon" /> 卖家管理
+                <img src="../assets/img/document_note.png" class="document-icon" /> 卖家管理
               </li>
               <li :class="{'unit-active':listUnit==3}" @click="listUnit=3;add('商铺管理')">
-                <img src="../assets/document_note.png" class="document-icon" /> 商铺管理
+                <img src="../assets/img/document_note.png" class="document-icon" /> 商铺管理
               </li>
               <li :class="{'unit-active':listUnit==4}" @click="listUnit=4;add('任务审核')">
-                <img src="../assets/document_note.png" class="document-icon" /> 任务审核
+                <img src="../assets/img/document_note.png" class="document-icon" /> 任务审核
               </li>
             </ul>
           </div>
           <div class="list-unit">
             <p @click="showList('showShop')">
-              <img src="../assets/folder1.jpg" class="folder-icon" /> 商家辅助
+              <img src="../assets/img/folder1.jpg" class="folder-icon" /> 商家辅助
             </p>
             <ul v-show="showShop==true">
               <li :class="{'unit-active':listUnit==5}" @click="listUnit=5;add('未接监控')">
-                <img src="../assets/document_note.png" class="document-icon" /> 未接监控
+                <img src="../assets/img/document_note.png" class="document-icon" /> 未接监控
               </li>
               <li :class="{'unit-active':listUnit==6}" @click="listUnit=6;add('未接跟踪')">
-                <img src="../assets/document_note.png" class="document-icon" /> 未接跟踪
+                <img src="../assets/img/document_note.png" class="document-icon" /> 未接跟踪
               </li>
             </ul>
           </div>
           <div class="list-unit">
             <p @click="showList('showData')">
-              <img src="../assets/folder1.jpg" class="folder-icon" /> 数据分析
+              <img src="../assets/img/folder1.jpg" class="folder-icon" /> 数据分析
             </p>
             <ul v-show="showData===true">
               <li :class="{'unit-active':listUnit==7}" @click="listUnit=7;add('单量日报')">
-                <img src="../assets/document_note.png" class="document-icon" /> 单量日报
+                <img src="../assets/img/document_note.png" class="document-icon" /> 单量日报
               </li>
             </ul>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
     <div class="right-content">
-      <a-tabs
-        hideAdd
-        v-model="activeKey"
-        type="editable-card"
-        @edit="onEdit"
-        @change="callback"
-        defaultActiveKey="1"
-      >
-        <a-tab-pane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable" :class="{'h600':pane.key!='用户管理'}">{{pane.content}}</a-tab-pane>
+      <a-tabs hideAdd v-model="activeKey" type="editable-card" @edit="onEdit" @change="callback" defaultActiveKey="1"> 
+        <a-tab-pane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">{{pane.content}}</a-tab-pane>
       </a-tabs>
-
-      <div class="right-content2" v-show="activeKey=='用户管理'">
-        <table class="right-content2-top">
-          <tr>
-            <td>
-              <span class="top-span">手机号</span>
-              <a-input />
-            </td>
-            <td>
-              <span class="top-span">邀请人ID</span>
-              <a-input />
-            </td>
-            <td>
-              <span class="top-span">客户编号</span>
-              <a-input />
-            </td>
-            <td>
-              <span class="top-span">客户姓名</span>
-              <a-input />
-            </td>
-            <td>
-              <span class="top-span">身份证号</span>
-              <a-input />
-            </td>
-            <td>
-              <span class="top-span">银行卡号</span>
-              <a-input />
-            </td>
-            <td>
-              <span class="top-span">旺旺号</span>
-              <a-input />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="top-span">QQ</span>
-              <a-input />
-            </td>
-            <td>
-              <span class="top-span">客户等级</span>
-              <a-select defaultValue="0" @change="handleChange">
-                <a-select-option value="0">--全部--</a-select-option>
-                <a-select-option value="lucy">Lucy</a-select-option>
-                <a-select-option value="disabled" disabled>Disabled</a-select-option>
-                <a-select-option value="Yiminghe">yiminghe</a-select-option>
-              </a-select>
-            </td>
-            <td>
-              <span class="top-span">是否审核</span>
-              <a-select defaultValue="0" @change="handleChange">
-                <a-select-option value="0">--待审核--</a-select-option>
-                <a-select-option value="lucy">Lucy</a-select-option>
-                <a-select-option value="disabled" disabled>Disabled</a-select-option>
-                <a-select-option value="Yiminghe">yiminghe</a-select-option>
-              </a-select>
-            </td>
-            <td>
-              <span class="top-span">业务员</span>
-              <a-select defaultValue="0" @change="handleChange">
-                <a-select-option value="0">--全部--</a-select-option>
-                <a-select-option value="lucy">Lucy</a-select-option>
-                <a-select-option value="disabled" disabled>Disabled</a-select-option>
-                <a-select-option value="Yiminghe">yiminghe</a-select-option>
-              </a-select>
-            </td>
-
-            <td>
-              <span class="top-span">是否冻结</span>
-              <a-select defaultValue="0" @change="handleChange">
-                <a-select-option value="0">--全部--</a-select-option>
-                <a-select-option value="lucy">Lucy</a-select-option>
-                <a-select-option value="disabled" disabled>Disabled</a-select-option>
-                <a-select-option value="Yiminghe">yiminghe</a-select-option>
-              </a-select>
-            </td>
-            <td>
-              <span class="top-span">账号审核</span>
-              <a-select defaultValue="0" @change="handleChange">
-                <a-select-option value="0">--全部--</a-select-option>
-                <a-select-option value="lucy">Lucy</a-select-option>
-                <a-select-option value="disabled" disabled>Disabled</a-select-option>
-                <a-select-option value="Yiminghe">yiminghe</a-select-option>
-              </a-select>
-            </td>
-            <td>
-              <span class="top-span w100">15天内未接单</span>
-              <a-checkbox></a-checkbox>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <span class="top-span">注册时间</span>
-              <a-range-picker format="YYYY-MM-DD" :placeholder="['开始时间', '结束时间']" />
-            </td>
-            <td colspan="2">
-              <span class="top-span">更新时间</span>
-              <a-range-picker format="YYYY-MM-DD" :placeholder="['开始时间', '结束时间']" />
-            </td>
-            <td>
-              <span class>
-                <a-button type="primary" icon="search">搜索</a-button>
-                <a-button type="primary" icon="search">导出</a-button>
-              </span>
-            </td>
-          </tr>
-        </table>
-        <div class="right-content2-detail">
-          <a-table :columns="columns" :dataSource="data" bordered :pagination="{ pageSize: 12 }">
-            <a slot="审核" slot-scope="text" href="javascript:;" class="table-shenhe">审核</a>
-
-            <template
-              v-for="col in ['1', '2', '3','4','5','6','7','8','9','10','11','12']"
-              :slot="col"
-              slot-scope="text, record, index"
-            >
-              <div :key="col">
-                <a-input
-                  v-if="record.editable"
-                  style="margin: -5px 0"
-                  :value="text"
-                  @change="e => handleChange(e.target.value, record.key, col)"
-                />
-                <template v-else>{{text}}</template>
-              </div>
-            </template>
-            <template slot="operation" slot-scope="text, record, index">
-              <div class="editable-row-operations">
-                <span v-if="record.editable">
-                  <a @click="() => save(record.key)">Save</a>
-                  <a-popconfirm title="Sure to cancel?" @confirm="() => cancel(record.key)">
-                    <a>Cancel</a>
-                  </a-popconfirm>
-                </span>
-                <span v-else>
-                  <a @click="() => edit(record.key)">Edit</a>
-                </span>
-              </div>
-            </template>
-          </a-table>
-        </div>
+      <div class="right-content2" v-show="activeKey=='首页'">
+        <a-table :columns="indexColumns" :dataSource="indexData" :pagination="false" />
       </div>
-      
+      <yonghuguanli-data class="right-content2" v-show="activeKey=='用户管理'"></yonghuguanli-data>
+      <guanliyuan-data class="right-content2" v-show="activeKey=='管理员'"></guanliyuan-data>
+      <jueseguanli-data class="right-content2" v-show="activeKey=='角色管理'"></jueseguanli-data>
+      <quanxian-data class="right-content2" v-show="activeKey=='权限管理'"></quanxian-data>
+      <quanxianyonghu-data class="right-content2" v-show="activeKey=='用户权限管理'"></quanxianyonghu-data>
+      <quanxianjuese-data class="right-content2" v-show="activeKey=='角色权限管理'"></quanxianjuese-data>
+      <caidanguanli-data class="right-content2" v-show="activeKey=='菜单管理'"></caidanguanli-data>
+  
     </div>
     <div class="bottom-content"></div>
   </div>
 </template>
 
 <script>
+import guanliyuanData from "./childComponents/guanliyuan";
+import yonghuguanliData from "./childComponents/yonghuguanli";
+import jueseguanliData from "./childComponents/jueseguanli";
+import quanxianData from "./childComponents/quanxian";
+import quanxianyonghuData from "./childComponents/quanxianYonghu";
+import quanxianjueseData from "./childComponents/quanxianJuese";
+import caidanguanliData from "./childComponents/caidanguanli";
 export default {
   name: "management",
   data() {
@@ -229,132 +188,80 @@ export default {
       showUser: false,
       showShop: false,
       showData: false,
+      showSetting: false,
+      showDataMsg: false,
+      showQuanxian:false,
       listUnit: 1,
       listUnit1: 5,
       listUnit2: 7,
       data: [],
-      targetKey: "用户管理",
+      targetKey: "首页",
       columns: [],
-      activeKey: "用户管理",
+      activeKey: "首页",
       newTabIndex: 0,
-      panes: []
+      panes: [],
+      indexColumns: [],
+      indexData: []
     };
   },
+  components: {
+    guanliyuanData,
+    yonghuguanliData,
+    jueseguanliData,
+    quanxianData,
+    quanxianyonghuData,
+    quanxianjueseData,
+    caidanguanliData
+  },
   mounted() {
-    this.columns = [
+    // 右侧菜单
+    this.panes = [{ title: "首页", content: "", key: "首页", closable: false }];
+    // 首页数据
+    this.indexColumns = [
+      {
+        title: "系统信息",
+        dataIndex: "name"
+      },
       {
         title: "",
-        dataIndex: "0",
-
-        scopedSlots: { customRender: "0" }
+        dataIndex: "age"
       },
       {
-        title: "创建时间",
-        dataIndex: "1",
-
-        scopedSlots: { customRender: "1" }
+        title: "",
+        dataIndex: "address"
       },
       {
-        title: "手机号",
-        dataIndex: "2",
-
-        scopedSlots: { customRender: "2" }
-      },
-      {
-        title: "用户编号",
-        dataIndex: "3",
-
-        scopedSlots: { customRender: "3" }
-      },
-      {
-        title: "邀请人编号",
-        dataIndex: "4",
-        scopedSlots: { customRender: "4" }
-      },
-      {
-        title: "等级",
-        dataIndex: "5",
-
-        scopedSlots: { customRender: "5" }
-      },
-      {
-        title: "通过状态",
-        dataIndex: "6",
-
-        scopedSlots: { customRender: "6" }
-      },
-
-      {
-        title: "审核状态",
-        dataIndex: "7",
-
-        scopedSlots: { customRender: "7" }
-      },
-      {
-        title: "姓名",
-        dataIndex: "8",
-        scopedSlots: { customRender: "8" }
-      },
-      ,
-      {
-        title: "身份证号",
-        dataIndex: "9",
-
-        scopedSlots: { customRender: "9" }
-      },
-      { title: "操作", dataIndex: "10", scopedSlots: { customRender: "审核" } },
-      {
-        title: "最后更新时间",
-        dataIndex: "11",
-        scopedSlots: { customRender: "11" }
-      },
-      {
-        title: "操作记录",
-        dataIndex: "12",
-        scopedSlots: { customRender: "12" }
+        title: "",
+        dataIndex: "detail"
       }
     ];
-
-    this.data = [];
-    for (let i = 0; i < 100; i++) {
-      this.data.push({
-        0: i + 1,
-        1: "2019-10-09 14:21:22",
-        2: `135` + i + "1267349",
-        3: "11723" + i,
-        4: "94563" + i + "1" + i,
-        5: "LV0",
-        6: "未通过",
-        7: "待审核",
-        8: "王爽",
-        9: "220304387249879579",
-        10: "审核",
-        11: "2019-10-09 14:21:22"
-      });
-    }
-    this.cacheData = this.data.map(item => ({ ...item }));
-    // 右侧菜单
-    this.panes = [{ title: "用户管理", content: "", key: "用户管理" ,closable:false}];
+    this.indexData = [
+      {
+        key: "1",
+        name: "平台",
+        age: "系统目录",
+        address: "系统根目录",
+        detail: "硬盘使用情况"
+      },
+      {
+        key: "2",
+        name: "Linux",
+        age: "dhxtdhxtsrcassetsimgs",
+        address: "/",
+        detail: "12.34GB/39.23GB 剩余26.03GB"
+      }
+    ];
   },
   methods: {
     showList(param) {
       if (param == "showUser") {
         this.showUser = !this.showUser;
-        if (this.showUser == true) {
-          // this.listUnit = 1;
-        }
       }
       if (param == "showShop") {
         this.showShop = !this.showShop;
-        if (this.showShop == true) {
-          // this.listUnit = 5;
-        }
       }
       if (param == "showData") {
         this.showData = !this.showData;
-        if (this.showData == true) {
-          // this.listUnit = 7;
-        }
       }
     },
     callback(targetKey) {
@@ -384,7 +291,7 @@ export default {
         } else {
           panes.push({
             title: title,
-            content: title + "内容",
+            content: "",
             key: activeKey
           });
         }
@@ -394,7 +301,6 @@ export default {
       }
     },
     remove(targetKey) {
-    
       let activeKey = this.activeKey;
       let lastIndex;
       this.panes.forEach((pane, i) => {
@@ -412,7 +318,7 @@ export default {
       }
       this.panes = panes;
       this.activeKey = activeKey;
-        console.log("removw", activeKey);
+      console.log("removw", activeKey);
     },
     handleChange(value, key, column) {
       const newData = [...this.data];
@@ -428,125 +334,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.management {
-  /* margin: 0 20px; */
-  height: 100%;
-  border-bottom: 1px solid #8ab3e1;
-}
-.top {
-  margin: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  height: 40px;
-  line-height: 40px;
-}
-.top-title {
-  float: left;
-  font-size: 26px;
-  font-weight: 600;
-}
-/* .folder-icon {
-  width: 16px;
-} */
-.document-icon {
-  width: 10px;
-}
-.left-content {
-  float: left;
-  width: 180px;
-  text-indent: 6px;
-  position: absolute;
-}
-.left-title {
-  background: #e5f0fe;
-  height: 40px;
-  line-height: 40px;
-}
-.left-content .list-title {
-  background: #ffe398;
-  height: 34px;
-  line-height: 34px;
-  border-bottom: 0;
-  cursor: pointer;
-}
-.list-title img {
-  margin-top: 9px;
-  /* width: 17px; */
-  margin-right: 9px;
-}
-.list-unit {
-  cursor: pointer;
-}
-.list-unit li {
-  padding-left: 20px;
-  cursor: pointer;
-}
-.left-detail p,
-.left-detail li {
-  height: 30px;
-  line-height: 30px;
-  border-bottom: 1px dashed #8ab3e1;
-}
-li.unit-active {
-  padding-left: 24px;
-  background: #ffe398;
-}
-.right-content2-top td {
-  padding-bottom: 10px;
-}
-.right-content2-top .top-span {
-  text-align: right;
-  width: 66px;
-  display: inline-block;
-  margin-right: 4px;
-}
-.ant-tabs-bar {
-  background: #e5f0fe !important;
-  border-bottom: 1px solid #ceddef;
-  margin-bottom: 0 !important;
-  padding: 8px 0 0 0;
-}
-.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-  margin-left: 10px;
-}
-.ant-input-affix-wrapper,
-.ant-select {
-  width: 60% !important;
-}
-.right-content {
-  border-left: 1px solid #bdd7f9;
-  margin-left: 180px;
-}
-.right-content2 {
-  background-color: #f4f4f4;
-  padding: 14px 20px;
-}
-.ant-table-wrapper {
-  background-color: #fff;
-}
-.ant-calendar-picker {
-  width: 80%;
-}
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td {
-  padding: 8px 16px !important;
-}
-.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-nav-container {
-  height: 32px !important;
-}
-.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-  line-height: 30px !important;
-}
-.table-shenhe {
-  color: #18aeff;
-  border-bottom: 1px solid #18aeff;
-}
-.ant-btn-primary {
-  margin-right: 20px;
-  background-color: #319eeb !important;
-  border-color: #319eeb !important;
-}
-.h600 {
-  min-height: 600px;
-}
 </style>
