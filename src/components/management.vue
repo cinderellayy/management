@@ -166,7 +166,9 @@
       <quanxianyonghu-data class="right-content2" v-show="activeKey=='用户权限管理'"></quanxianyonghu-data>
       <quanxianjuese-data class="right-content2" v-show="activeKey=='角色权限管理'"></quanxianjuese-data>
       <caidanguanli-data class="right-content2" v-show="activeKey=='菜单管理'"></caidanguanli-data>
-  
+      <daima-data class="right-content2" v-show="activeKey=='代码生成'"></daima-data>
+      <xitongsetting-data class="right-content2" v-show="activeKey=='系统设置'"></xitongsetting-data>
+      <xitongmsg-data class="right-content2" v-show="activeKey=='系统消息'"></xitongmsg-data>
     </div>
     <div class="bottom-content"></div>
   </div>
@@ -180,6 +182,9 @@ import quanxianData from "./childComponents/quanxian";
 import quanxianyonghuData from "./childComponents/quanxianYonghu";
 import quanxianjueseData from "./childComponents/quanxianJuese";
 import caidanguanliData from "./childComponents/caidanguanli";
+import daimaData from "./childComponents/daima";
+import xitongsettingData from "./childComponents/xitongSetting";
+import xitongmsgData from "./childComponents/xitongMsg";
 export default {
   name: "management",
   data() {
@@ -211,7 +216,10 @@ export default {
     quanxianData,
     quanxianyonghuData,
     quanxianjueseData,
-    caidanguanliData
+    caidanguanliData,
+    daimaData,
+    xitongsettingData,
+    xitongmsgData
   },
   mounted() {
     // 右侧菜单
