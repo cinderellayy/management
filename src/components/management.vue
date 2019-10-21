@@ -67,24 +67,24 @@
           </div>
           <!-- 数据统计 -->
           <div class="list-unit">
-            <p :class="{'unit-active':listUnit=='数据统计'}" @click="showDataMsg=!showDataMsg">
-              <a-icon type="setting" />数据统计
+            <p  @click="showDataMsg=!showDataMsg">
+             数据统计
               <a-icon type="caret-down" class="arrow-icon" />
             </p>
             <ul v-show="showDataMsg==true">
-              <li
+              <li  class="pl30"
                 :class="{'unit-active':listUnit=='单量统计'}"
                 @click="listUnit='单量统计';add('单量统计')"
               >单量统计</li>
-              <li
+              <li  class="pl30"
                 :class="{'unit-active':listUnit=='数据统计'}"
                 @click="listUnit='数据统计';add('数据统计')"
               >数据统计</li>
-              <li
+              <li  class="pl30"
                 :class="{'unit-active':listUnit=='资金统计'}"
                 @click="listUnit='资金统计';add('资金统计')"
               >资金统计</li>
-              <li
+              <li  class="pl30"
                 :class="{'unit-active':listUnit=='分站统计'}"
                 @click="listUnit='分站统计';add('分站统计')"
               >分站统计</li>
@@ -107,48 +107,6 @@
             <p :class="{'unit-active':listUnit=='任务管理'}" @click="listUnit='任务管理';add('任务管理')">任务管理</p>
             <p :class="{'unit-active':listUnit=='用户管理'}" @click="listUnit='用户管理';add('用户管理')">用户管理</p>
           </div>
-          <!-- <div class="list-unit">
-            <p @click="showList('showUser')">
-              <img src="../assets/img/folder1.jpg" class="folder-icon" /> 用户中心
-            </p>
-            <ul v-show="showUser==true">
-              <li :class="{'unit-active':listUnit==1}" @click="listUnit=1;add('用户管理')">
-                <img src="../assets/img/document_note.png" class="document-icon" /> 用户管理
-              </li>
-              <li :class="{'unit-active':listUnit==2}" @click="listUnit=2;add('卖家管理')">
-                <img src="../assets/img/document_note.png" class="document-icon" /> 卖家管理
-              </li>
-              <li :class="{'unit-active':listUnit==3}" @click="listUnit=3;add('商铺管理')">
-                <img src="../assets/img/document_note.png" class="document-icon" /> 商铺管理
-              </li>
-              <li :class="{'unit-active':listUnit==4}" @click="listUnit=4;add('任务审核')">
-                <img src="../assets/img/document_note.png" class="document-icon" /> 任务审核
-              </li>
-            </ul>
-          </div>
-          <div class="list-unit">
-            <p @click="showList('showShop')">
-              <img src="../assets/img/folder1.jpg" class="folder-icon" /> 商家辅助
-            </p>
-            <ul v-show="showShop==true">
-              <li :class="{'unit-active':listUnit==5}" @click="listUnit=5;add('未接监控')">
-                <img src="../assets/img/document_note.png" class="document-icon" /> 未接监控
-              </li>
-              <li :class="{'unit-active':listUnit==6}" @click="listUnit=6;add('未接跟踪')">
-                <img src="../assets/img/document_note.png" class="document-icon" /> 未接跟踪
-              </li>
-            </ul>
-          </div>
-          <div class="list-unit">
-            <p @click="showList('showData')">
-              <img src="../assets/img/folder1.jpg" class="folder-icon" /> 数据分析
-            </p>
-            <ul v-show="showData===true">
-              <li :class="{'unit-active':listUnit==7}" @click="listUnit=7;add('单量日报')">
-                <img src="../assets/img/document_note.png" class="document-icon" /> 单量日报
-              </li>
-            </ul>
-          </div>-->
         </div>
       </div>
     </div>
@@ -169,6 +127,22 @@
       <daima-data class="right-content2" v-show="activeKey=='代码生成'"></daima-data>
       <xitongsetting-data class="right-content2" v-show="activeKey=='系统设置'"></xitongsetting-data>
       <xitongmsg-data class="right-content2" v-show="activeKey=='系统消息'"></xitongmsg-data>
+      <tixianguanli-data class="right-content2" v-show="activeKey=='提现管理'"></tixianguanli-data>
+      <maijiaguanli-data class="right-content2" v-show="activeKey=='卖家管理'"></maijiaguanli-data>
+      <heimingdanguanli-data class="right-content2" v-show="activeKey=='黑名单管理'"></heimingdanguanli-data>
+      <tuanduishezhi-data class="right-content2" v-show="activeKey=='团队设置'"></tuanduishezhi-data>
+      <mytuandui-data class="right-content2" v-show="activeKey=='我的团队'"></mytuandui-data>
+      <danliangtongji-data class="right-content2" v-show="activeKey=='单量统计'"></danliangtongji-data>
+      <shujvtongji-data class="right-content2" v-show="activeKey=='数据统计'"></shujvtongji-data>
+      <zijintongji-data class="right-content2" v-show="activeKey=='资金统计'"></zijintongji-data>
+      <fenzhantongji-data class="right-content2" v-show="activeKey=='分站统计'"></fenzhantongji-data>
+      <zhanghaoxinxi-data class="right-content2" v-show="activeKey=='账号信息'"></zhanghaoxinxi-data>
+      <pianziku-data class="right-content2" v-show="activeKey=='骗子库'"></pianziku-data>
+      <fenzhanguanli-data class="right-content2" v-show="activeKey=='分站管理'"></fenzhanguanli-data>
+      <shensuzhongxin-data class="right-content2" v-show="activeKey=='申诉中心'"></shensuzhongxin-data>
+      <yinhangguanli-data class="right-content2" v-show="activeKey=='银行管理'"></yinhangguanli-data>
+  
+      
     </div>
     <div class="bottom-content"></div>
   </div>
@@ -185,6 +159,20 @@ import caidanguanliData from "./childComponents/caidanguanli";
 import daimaData from "./childComponents/daima";
 import xitongsettingData from "./childComponents/xitongSetting";
 import xitongmsgData from "./childComponents/xitongMsg";
+import tixianguanliData from "./childComponents/tixianguanli";
+import maijiaguanliData from "./childComponents/maijiaguanli";
+import heimingdanguanliData from "./childComponents/heimingdanguanli";
+import tuanduishezhiData from "./childComponents/tuanduishezhi";
+import mytuanduiData from "./childComponents/mytuandui";
+import danliangtongjiData from "./childComponents/danliangtongji";
+import shujvtongjiData from "./childComponents/shujvtongji";
+import zijintongjiData from "./childComponents/zijintongji";
+import fenzhantongjiData from "./childComponents/fenzhantongji";
+import zhanghaoxinxiData from "./childComponents/zhanghaoxinxi";
+import pianzikuData from "./childComponents/pianziku";
+import fenzhanguanliData from "./childComponents/fenzhanguanli";
+import shensuzhongxinData from "./childComponents/shensuzhongxin";
+import yinhangguanliData from "./childComponents/yinhangguanli";
 export default {
   name: "management",
   data() {
@@ -219,7 +207,21 @@ export default {
     caidanguanliData,
     daimaData,
     xitongsettingData,
-    xitongmsgData
+    xitongmsgData,
+    tixianguanliData,
+    maijiaguanliData,
+    heimingdanguanliData,
+    tuanduishezhiData,
+    mytuanduiData,
+    danliangtongjiData,
+    shujvtongjiData,
+    zijintongjiData,
+    fenzhantongjiData,
+    zhanghaoxinxiData,
+    pianzikuData,
+    fenzhanguanliData,
+    shensuzhongxinData,
+    yinhangguanliData
   },
   mounted() {
     // 右侧菜单

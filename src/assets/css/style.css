@@ -187,3 +187,17 @@
   float: right;
     margin-right: 18%;
 }
+/* 提现管理 */
+.tixian .ant-table-title{
+  text-align: right;
+}
+.tixian .ant-table-title .anticon{
+  margin-left: 6px !important;
+  cursor: pointer;
+}
+
+/* 单量统计 */
+.ant-table-content{
+  overflow-x: auto !important;
+}
+
