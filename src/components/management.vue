@@ -115,33 +115,37 @@
         <a-tab-pane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">{{pane.content}}</a-tab-pane>
       </a-tabs>
       <div class="right-content2" v-show="activeKey=='首页'">
-        <a-table :columns="indexColumns" :dataSource="indexData" :pagination="false" />
+        <a-table :columns="indexColumns"  :dataSource="indexData"  rowKey="1" :pagination="false" />
       </div>
-      <yonghuguanli-data class="right-content2" v-show="activeKey=='用户管理'"></yonghuguanli-data>
-      <guanliyuan-data class="right-content2" v-show="activeKey=='管理员'"></guanliyuan-data>
-      <jueseguanli-data class="right-content2" v-show="activeKey=='角色管理'"></jueseguanli-data>
-      <quanxian-data class="right-content2" v-show="activeKey=='权限管理'"></quanxian-data>
-      <quanxianyonghu-data class="right-content2" v-show="activeKey=='用户权限管理'"></quanxianyonghu-data>
-      <quanxianjuese-data class="right-content2" v-show="activeKey=='角色权限管理'"></quanxianjuese-data>
-      <caidanguanli-data class="right-content2" v-show="activeKey=='菜单管理'"></caidanguanli-data>
-      <daima-data class="right-content2" v-show="activeKey=='代码生成'"></daima-data>
-      <xitongsetting-data class="right-content2" v-show="activeKey=='系统设置'"></xitongsetting-data>
-      <xitongmsg-data class="right-content2" v-show="activeKey=='系统消息'"></xitongmsg-data>
-      <tixianguanli-data class="right-content2" v-show="activeKey=='提现管理'"></tixianguanli-data>
-      <maijiaguanli-data class="right-content2" v-show="activeKey=='卖家管理'"></maijiaguanli-data>
-      <heimingdanguanli-data class="right-content2" v-show="activeKey=='黑名单管理'"></heimingdanguanli-data>
-      <tuanduishezhi-data class="right-content2" v-show="activeKey=='团队设置'"></tuanduishezhi-data>
-      <mytuandui-data class="right-content2" v-show="activeKey=='我的团队'"></mytuandui-data>
-      <danliangtongji-data class="right-content2" v-show="activeKey=='单量统计'"></danliangtongji-data>
-      <shujvtongji-data class="right-content2" v-show="activeKey=='数据统计'"></shujvtongji-data>
-      <zijintongji-data class="right-content2" v-show="activeKey=='资金统计'"></zijintongji-data>
-      <fenzhantongji-data class="right-content2" v-show="activeKey=='分站统计'"></fenzhantongji-data>
-      <zhanghaoxinxi-data class="right-content2" v-show="activeKey=='账号信息'"></zhanghaoxinxi-data>
-      <pianziku-data class="right-content2" v-show="activeKey=='骗子库'"></pianziku-data>
-      <fenzhanguanli-data class="right-content2" v-show="activeKey=='分站管理'"></fenzhanguanli-data>
-      <shensuzhongxin-data class="right-content2" v-show="activeKey=='申诉中心'"></shensuzhongxin-data>
-      <yinhangguanli-data class="right-content2" v-show="activeKey=='银行管理'"></yinhangguanli-data>
-  
+      <yonghuguanli-data class="right-content2" v-if="activeKey=='用户管理'"></yonghuguanli-data>
+      <guanliyuan-data class="right-content2" v-if="activeKey=='管理员'"></guanliyuan-data>
+      <jueseguanli-data class="right-content2" v-if="activeKey=='角色管理'"></jueseguanli-data>
+      <quanxian-data class="right-content2" v-if="activeKey=='权限管理'"></quanxian-data>
+      <quanxianyonghu-data class="right-content2" v-if="activeKey=='用户权限管理'"></quanxianyonghu-data>
+      <quanxianjuese-data class="right-content2" v-if="activeKey=='角色权限管理'"></quanxianjuese-data>
+      <caidanguanli-data class="right-content2" v-if="activeKey=='菜单管理'"></caidanguanli-data>
+      <daima-data class="right-content2" v-if="activeKey=='代码生成'"></daima-data>
+      <xitongsetting-data class="right-content2" v-if="activeKey=='系统设置'"></xitongsetting-data>
+      <xitongmsg-data class="right-content2" v-if="activeKey=='系统消息'"></xitongmsg-data>
+      <tixianguanli-data class="right-content2" v-if="activeKey=='提现管理'"></tixianguanli-data>
+      <maijiaguanli-data class="right-content2" v-if="activeKey=='卖家管理'"></maijiaguanli-data>
+      <heimingdanguanli-data class="right-content2" v-if="activeKey=='黑名单管理'"></heimingdanguanli-data>
+      <tuanduishezhi-data class="right-content2" v-if="activeKey=='团队设置'"></tuanduishezhi-data>
+      <mytuandui-data class="right-content2" v-if="activeKey=='我的团队'"></mytuandui-data>
+      <danliangtongji-data class="right-content2" v-if="activeKey=='单量统计'"></danliangtongji-data>
+      <shujvtongji-data class="right-content2" v-if="activeKey=='数据统计'"></shujvtongji-data>
+      <zijintongji-data class="right-content2" v-if="activeKey=='资金统计'"></zijintongji-data>
+      <fenzhantongji-data class="right-content2" v-if="activeKey=='分站统计'"></fenzhantongji-data>
+      <zhanghaoxinxi-data class="right-content2" v-if="activeKey=='账号信息'"></zhanghaoxinxi-data>
+      <pianziku-data class="right-content2" v-if="activeKey=='骗子库'"></pianziku-data>
+      <fenzhanguanli-data class="right-content2" v-if="activeKey=='分站管理'"></fenzhanguanli-data>
+      <shensuzhongxin-data class="right-content2" v-if="activeKey=='申诉中心'"></shensuzhongxin-data>
+      <yinhangguanli-data class="right-content2" v-if="activeKey=='银行管理'"></yinhangguanli-data>
+      <yongjinguanli-data class="right-content2" v-if="activeKey=='佣金明细管理'"></yongjinguanli-data>
+      <dianpuguanli-data class="right-content2" v-if="activeKey=='店铺管理'"></dianpuguanli-data>
+      <dingdanguanli-data class="right-content2" v-if="activeKey=='订单管理'"></dingdanguanli-data>
+      <chongzhiguanli-data class="right-content2" v-if="activeKey=='充值管理'"></chongzhiguanli-data>
+       <renwuguanli-data class="right-content2" v-if="activeKey=='任务管理'"></renwuguanli-data>
       
     </div>
     <div class="bottom-content"></div>
@@ -173,6 +177,12 @@ import pianzikuData from "./childComponents/pianziku";
 import fenzhanguanliData from "./childComponents/fenzhanguanli";
 import shensuzhongxinData from "./childComponents/shensuzhongxin";
 import yinhangguanliData from "./childComponents/yinhangguanli";
+import yongjinguanliData from "./childComponents/yongjinguanli";
+import dianpuguanliData from "./childComponents/dianpuguanli";
+import dingdanguanliData from "./childComponents/dingdanguanli";
+import chongzhiguanliData from "./childComponents/chongzhiguanli";
+import renwuguanliData from "./childComponents/renwuguanli";
+
 export default {
   name: "management",
   data() {
@@ -221,7 +231,12 @@ export default {
     pianzikuData,
     fenzhanguanliData,
     shensuzhongxinData,
-    yinhangguanliData
+    yinhangguanliData,
+    yongjinguanliData,
+    dianpuguanliData,
+    dingdanguanliData,
+    chongzhiguanliData,
+    renwuguanliData
   },
   mounted() {
     // 右侧菜单
@@ -230,35 +245,40 @@ export default {
     this.indexColumns = [
       {
         title: "系统信息",
-        dataIndex: "name"
+        dataIndex: "1",
+       
+        
       },
       {
         title: "",
-        dataIndex: "age"
+        dataIndex: "2",
+      
       },
       {
         title: "",
-        dataIndex: "address"
+        dataIndex: "3",
+        
       },
       {
         title: "",
-        dataIndex: "detail"
+        dataIndex: "4",
+       
       }
     ];
     this.indexData = [
       {
-        key: "1",
-        name: "平台",
-        age: "系统目录",
-        address: "系统根目录",
-        detail: "硬盘使用情况"
+       
+        1: "平台",
+        2: "系统目录",
+        3: "系统根目录",
+        4: "硬盘使用情况"
       },
       {
-        key: "2",
-        name: "Linux",
-        age: "dhxtdhxtsrcassetsimgs",
-        address: "/",
-        detail: "12.34GB/39.23GB 剩余26.03GB"
+      
+        1: "Linux",
+        2: "dhxtdhxtsrcassetsimgs",
+        3: "/",
+        4: "12.34GB/39.23GB 剩余26.03GB"
       }
     ];
   },
@@ -275,7 +295,6 @@ export default {
       }
     },
     callback(targetKey) {
-      console.log("callback", targetKey);
       this.targetKey = targetKey;
     },
     onEdit(targetKey, action) {
@@ -307,7 +326,6 @@ export default {
         }
         this.panes = panes;
         this.activeKey = activeKey;
-        console.log("add", this.activeKey);
       }
     },
     remove(targetKey) {
@@ -328,7 +346,6 @@ export default {
       }
       this.panes = panes;
       this.activeKey = activeKey;
-      console.log("removw", activeKey);
     },
     handleChange(value, key, column) {
       const newData = [...this.data];

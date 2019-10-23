@@ -1,5 +1,6 @@
 <template>
   <div>
+     <div class="guanliyuan-top mb20">
     <table class="right-content2-top">
       <tr>
         <td>
@@ -97,16 +98,17 @@
           <a-range-picker format="YYYY-MM-DD" :placeholder="['开始时间', '结束时间']" />
         </td>
         <td>
-          <span class>
+          <span class="right">
             <a-button type="primary" icon="search">搜索</a-button>
-            <a-button type="primary" icon="search">导出</a-button>
+            <a-button type="primary" icon="download">导出</a-button>
           </span>
         </td>
       </tr>
     </table>
+     </div>
     <div class="right-content2-detail">
-      <a-table :columns="columns" :dataSource="data" bordered :pagination="{ pageSize: 12 }">
-        <a slot="审核" slot-scope="text" href="javascript:;" class="table-shenhe">审核</a>
+      <a-table :columns="columns" :roeKey="0" :dataSource="data" bordered :pagination="{ pageSize: 10 }">
+        <a slot="审核"  href="javascript:;" class="table-shenhe">审核</a>
       </a-table>
     </div>
   </div>

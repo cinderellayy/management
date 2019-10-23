@@ -84,11 +84,13 @@
 
 .right-content2-top td {
   padding-bottom: 10px;
+  white-space: nowrap;
+  min-width: 200px;
 }
 
 .right-content2-top .top-span {
   text-align: right;
-  width: 66px;
+  width: 78px;
   display: inline-block;
   margin-right: 4px;
 }
@@ -174,7 +176,9 @@
   border: 1px solid #e8e8e8;
   padding: 20px 10px;
   background: #fafafa;
+  overflow-x: auto;
 }
+
 /* 角色管理 */
 .juese-delete {
   position: absolute;

@@ -5,7 +5,7 @@
         <tr>
           <td>
             <span class="top-span">年月</span>
-            <a-month-picker @change="selectMonth" />
+            <a-month-picker placeholder="" @change="selectMonth" class="w060"/>
           </td>
           <td>
             <span class="top-span">卖家ID</span>
@@ -14,7 +14,7 @@
           <td>
             <span class="top-span">总量区间</span>
             <div class="inline-block">
-              <a-input class="w04" />-
+              <a-input class="w04" /> -
               <a-input class="w04" />
             </div>
           </td>
@@ -31,9 +31,9 @@
 
           <td class="textindent20">
             <span>
-              <a-button class="mr10">搜索</a-button>
-              <a-button class="mr10">导出</a-button>
-              <a-button class="mr10">手工生成</a-button>
+              <a-button  type="primary" icon="search" class="mr10">搜索</a-button>
+              <a-button  type="primary" icon="download" class="mr10">导出</a-button>
+              <a-button  type="primary" icon="save" class="mr10">手工生成</a-button>
             </span>
           </td>
         </tr>
@@ -48,6 +48,7 @@
         :columns="columns"
         :dataSource="data"
         bordered
+        
         :pagination="{ pageSize: 8}"
       >
         <template slot="title" slot-scope="currentPageData" class="tixian-title">

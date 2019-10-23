@@ -13,9 +13,9 @@
           
           <td class="textindent20">
             <span>
-              <a-button class="mr10">搜索</a-button>
-              <a-button class="mr10">导出</a-button>
-              <a-button class="mr10">手工生成</a-button>
+              <a-button  type="primary" icon="search" class="mr10">搜索</a-button>
+              <a-button  type="primary" icon="download" class="mr10">导出</a-button>
+              <a-button  type="primary" icon="save" class="mr10">手工生成</a-button>
             </span>
           </td>
         </tr>

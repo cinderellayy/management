@@ -1,6 +1,6 @@
 body {
     -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
-    font-size: 0.2rem;
+    font-size: 14px;
     padding: 0;
     margin: 0;
     font-family: "微软雅黑";
@@ -128,6 +128,18 @@ li {
 .mr10{
     margin-right: 10px;
 }
+.mr07{
+    margin-right: 7%;
+}
+.mr010{
+    margin-right: 10%;
+}
+.mr014{
+    margin-right: 14%;
+}
+.mr023{
+    margin-right: 23%;
+}
 .mb20{
     margin-bottom: 20px;
 }
@@ -158,25 +170,28 @@ li {
 .w01{
     width: 100%;
 }
+.w060{
+    width: 60% !important;
+}
 .inline-block .w04{
     width: 48% !important;
 }
 /* 滚动条整体部分 */
-.scroll::-webkit-scrollbar 
+.scroll::-webkit-scrollbar,.guanliyuan-top::-webkit-scrollbar,.ant-table-content::-webkit-scrollbar
   {
   width: 5px;
-  height: 10px;
+  height: 8px;
   background-color:#e5f0fe;
 }
 /*  //scroll轨道背景 */
-.scroll::-webkit-scrollbar-track
+.scroll::-webkit-scrollbar-track,.guanliyuan-top::-webkit-scrollbar-track,.ant-table-content::-webkit-scrollbar-track
   {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   background-color: #fff;
 }
 /* 滚动条中能上下移动的小块 */
-.scroll::-webkit-scrollbar-thumb  {
+.scroll::-webkit-scrollbar-thumb,.guanliyuan-top::-webkit-scrollbar-thumb,.ant-table-content::-webkit-scrollbar-thumb   {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color:#e5f0fe;

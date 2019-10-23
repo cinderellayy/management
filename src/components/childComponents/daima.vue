@@ -35,9 +35,8 @@ export default {
   },
  
   methods: {
-   handleChange(value) {
-        console.log(`selected ${value}`);
-      },
+   handleChange(value) {  
+   },
   }
 };
 </script>
