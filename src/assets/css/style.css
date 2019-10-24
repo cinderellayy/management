@@ -106,7 +106,7 @@
   margin-left: 10px;
 }
 
-.ant-input-affix-wrapper, .ant-select {
+table .ant-input-affix-wrapper, table.ant-select {
   width: 60% !important;
 }
 
@@ -145,6 +145,7 @@
 .table-shenhe {
   color: #18aeff;
   border-bottom: 1px solid #18aeff;
+  cursor: pointer;
 }
 
 .ant-btn-primary {
@@ -203,5 +204,10 @@
 /* 单量统计 */
 .ant-table-content{
   overflow-x: auto !important;
+  max-height: 450px;
 }
 
+.mxh414 .ant-table-content{
+  
+  max-height: 414px;
+}

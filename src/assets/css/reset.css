@@ -143,6 +143,12 @@ li {
 .mb20{
     margin-bottom: 20px;
 }
+.mb-20{
+    margin-bottom: -20px;
+}
+.mxh414{
+    max-height: 414px !important;
+}
 .w100 {
     width: 100px !important;
 }
@@ -200,3 +206,15 @@ li {
 .ant-table td,.ant-table th {
     white-space: nowrap;
   }
+
+  .ant-select-selection-selected-value {
+
+    max-width: inherit !important;
+   
+}
+.ant-modal-body div {
+    margin-bottom: 10px;
+}
+.bottom-50{
+    bottom: -50px !important;
+}
