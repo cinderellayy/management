@@ -12,7 +12,7 @@
             <a-range-picker format="YYYY-MM-DD" :placeholder="['开始时间', '结束时间']" />
           </td>
           <td width="140">
-            <span  class="right">
+            <span class="right">
               <a-button type="primary" icon="search">搜索</a-button>
             </span>
           </td>
@@ -23,18 +23,33 @@
       <span>垫付单量总计: 20 浏览单量总计: 20</span>
     </div>
     <div class="right-content2-detail">
-      <a-table :columns="columns" :dataSource="data" bordered :pagination="{ pageSize: 10}"></a-table>
+      <a-locale-provider :locale="zhCN">
+        <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination"></a-table>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "myteam",
   data() {
     return {
+      zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
