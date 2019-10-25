@@ -6,49 +6,81 @@
           <td>
             <span class="top-span">日期</span>
             <div class="inline-block">
-              <a-input class="w04" /> -
+              <a-input class="w04" />-
               <a-input class="w04" />
             </div>
           </td>
-          
+
           <td class="textindent20">
             <span>
-              <a-button  type="primary" icon="search" class="mr10">搜索</a-button>
-              <a-button  type="primary" icon="download" class="mr10">导出</a-button>
-              <a-button  type="primary" icon="save" class="mr10">手工生成</a-button>
+              <a-button type="primary" icon="search" class="mr10">搜索</a-button>
+              <a-button type="primary" icon="download" class="mr10">导出</a-button>
+              <a-button type="primary" icon="save" class="mr10">手工生成</a-button>
             </span>
           </td>
         </tr>
-  
       </table>
     </div>
- 
+
     <div class="right-content2-detail">
-      <a-table
-        :rowSelection="rowSelection"
-        :columns="columns"
-        :dataSource="data"
-        bordered
-        :pagination="{ pageSize: 10}"
-      >
-        <template slot="title" class="tixian-title">
-          <a-icon type="bars" />
-          <a-icon type="folder-open" />
-          <a-icon type="printer" />
-        </template>
-        <a slot="10"  href="javascript:;"  class="table-shenhe">提现</a>
-      </a-table>
+      <a-locale-provider :locale="zhCN">
+        <a-table
+          :rowSelection="rowSelection"
+          :columns="columns"
+          :dataSource="data"
+          bordered
+          :pagination="pagination"
+        >
+          <template slot="title" class="tixian-title">
+            <a-icon type="bars" />
+            <a-icon type="folder-open" />
+            <a-icon type="printer" />
+          </template>
+          <div slot="10" class="table-shenhe" @click="showModal('信息')">提现</div>
+        </a-table>
+      </a-locale-provider>
+    </div>
+    <div>
+      <a-locale-provider :locale="zhCN">
+        <a-modal :title="modal" v-model="visible" @ok="handleOk">
+          <div>
+            <p>分站名</p>
+            <a-input />
+          </div>
+          <div>
+            <p>金额</p>
+            <a-input />
+          </div>
+          <div>
+            <p>备注</p>
+            <a-input />
+          </div>
+        </a-modal>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "substationstatistics",
   data() {
     return {
+      zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
@@ -82,7 +114,8 @@ export default {
         dataIndex: "5",
 
         scopedSlots: { customRender: "5" }
-      },  {
+      },
+      {
         title: "今日新增店铺数",
         dataIndex: "6",
 
@@ -116,16 +149,15 @@ export default {
     for (let i = 0; i < 30; i++) {
       this.data.push({
         1: "分站名称",
-        2:  "2019-10-09 14:21:22",
-        3: "5234"+i,
+        2: "2019-10-09 14:21:22",
+        3: "5234" + i,
         4: "94563" + i + "1" + i,
         5: "94563" + i + "1" + i,
         4: "12301",
         6: "2301",
-        7: "1062" + i ,
-        8: i+"202394",
-        9: "审核",
-
+        7: "1062" + i,
+        8: i + "202394",
+        9: "审核"
       });
     }
   },
@@ -144,14 +176,13 @@ export default {
     }
   },
   methods: {
-    selectMonth(date, dateString) {},
-    handleChange(value, key, column) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target[column] = value;
-        this.data = newData;
-      }
+    showModal(param) {
+      this.modal = param;
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
     }
   }
 };

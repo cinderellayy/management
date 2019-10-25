@@ -1,17 +1,14 @@
 <template>
   <div>
- 
     <div class="guanliyuan-middle">
       <span>总计：{{data.length}}条记录</span>
       <div class="right">
-      
-        <a-button icon="folder-add"  @click="showModal('添加')">添加</a-button>
+        <a-button icon="folder-add" @click="showModal('添加')">添加</a-button>
       </div>
     </div>
     <div class="right-content2-detail relative">
       <a-locale-provider :locale="zhCN">
         <a-table
-     
           :rowSelection="rowSelection"
           :columns="columns"
           :dataSource="data"
@@ -20,26 +17,31 @@
         >
           <div slot="操作">
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
-            <span class="table-shenhe">删除</span>
+            <span class="table-shenhe" @click="showModal('删除')">删除</span>
           </div>
         </a-table>
       </a-locale-provider>
-      <a-button type="danger" class="juese-delete ">删除所选</a-button>
+      <a-button type="danger" class="juese-delete">删除所选</a-button>
     </div>
     <div>
       <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
-          <div>
-            <p>消息名称</p>
-            <a-input />
-          </div>
-          <div>
-            <p>消息类别</p>
-            <a-input />
-          </div>
-           <div>
-            <p>消息内容</p>
+          <div v-show="modal!='删除'">
+            <div>
+              <p>消息名称</p>
+              <a-input />
+            </div>
+            <div>
+              <p>消息类别</p>
+              <a-input />
+            </div>
+            <div>
+              <p>消息内容</p>
               <a-textarea :rows="4" />
+            </div>
+          </div>
+          <div v-show="modal=='删除'">
+            <p>确定要删除吗（该操作无法恢复）？</p>
           </div>
         </a-modal>
       </a-locale-provider>
@@ -52,7 +54,7 @@ import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "systemmsg",
   data() {
-   return {
+    return {
       zhCN,
       data: [],
       columns: [],
@@ -70,7 +72,6 @@ export default {
     };
   },
   mounted() {
-    // 用户管理内容
     this.columns = [
       {
         title: "ID",
@@ -101,8 +102,7 @@ export default {
       this.data.push({
         0: i + 1,
         1: "丽萍",
-        2: "5" + i + "2679",
-      
+        2: "5" + i + "2679"
       });
     }
   },
@@ -121,14 +121,6 @@ export default {
     }
   },
   methods: {
-    handleChange(value, key, column) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target[column] = value;
-        this.data = newData;
-      }
-    },
     showModal(param) {
       this.modal = param;
       this.visible = true;

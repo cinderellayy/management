@@ -61,7 +61,7 @@
         >
           <div slot="操作">
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
-            <span class="table-shenhe">删除</span>
+            <span class="table-shenhe" @click="showModal('删除')">删除</span>
           </div>
           <img style="width:50px;heigth:50px" slot="4" slot-scope="data" :src="data" />
         </a-table>
@@ -70,32 +70,49 @@
     <div>
       <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
-          <div> 昵称<a-input />  </div>
-          <div> 用户名<a-input /> <span>用户名将作为你登陆系统的账号</span> </div>
-          <div> 密码 <a-input />  <span>无需修改的话, 请勿填写!</span></div>
-          <div> 头像
-            <p class="mb-20">
-              <a-upload
-                class="inline-block"
-                name="picture"
-                :multiple="false"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="upload"
-              >
-                <a-button>
-                  <a-icon type="upload" />点击上传头像
-                </a-button>
-              </a-upload>
-            </p>
-            <span>选择图片上传, 支持多图上传, 支持 jpg, gif, png 等格式</span>
+          <div v-show="modal!='删除'">
+            <div>
+              昵称
+              <a-input />
+            </div>
+            <div>
+              用户名
+              <a-input />
+              <span>用户名将作为你登陆系统的账号</span>
+            </div>
+            <div>
+              密码
+              <a-input />
+              <span>无需修改的话, 请勿填写!</span>
+            </div>
+            <div>
+              头像
+              <p class="mb-20">
+                <a-upload
+                  class="inline-block"
+                  name="picture"
+                  :multiple="false"
+                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  @change="upload"
+                >
+                  <a-button>
+                    <a-icon type="upload" />点击上传头像
+                  </a-button>
+                </a-upload>
+              </p>
+              <span>选择图片上传, 支持多图上传, 支持 jpg, gif, png 等格式</span>
+            </div>
+            <div>
+              手机号码
+              <a-input />
+            </div>
+            <div>
+              角色
+              <a-input />
+            </div>
           </div>
-          <div>
-            手机号码
-            <a-input />
-          </div>
-          <div>
-            角色
-            <a-input />
+          <div v-show="modal=='删除'">
+            <p>确定要删除吗（该操作无法恢复）？</p>
           </div>
         </a-modal>
       </a-locale-provider>
@@ -111,7 +128,7 @@ export default {
     return {
       zhCN,
       visible: false,
-      modal:'编辑',
+      modal: "编辑",
       data: [],
       columns: [],
       pagination: {
@@ -126,7 +143,6 @@ export default {
     };
   },
   mounted() {
-    // 用户管理内容
     this.columns = [
       {
         title: "ID",
@@ -177,7 +193,6 @@ export default {
         scopedSlots: { customRender: "操作" }
       }
     ];
-    this.data = [];
     for (let i = 0; i < 30; i++) {
       this.data.push({
         0: i + 1,
@@ -205,14 +220,6 @@ export default {
     }
   },
   methods: {
-    handleChange(value, key, column) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target[column] = value;
-        this.data = newData;
-      }
-    },
     upload(info) {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
@@ -224,7 +231,7 @@ export default {
       }
     },
     showModal(param) {
-      this.modal = param
+      this.modal = param;
       this.visible = true;
     },
     handleOk(e) {

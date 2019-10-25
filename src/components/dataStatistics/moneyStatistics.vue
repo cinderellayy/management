@@ -24,12 +24,13 @@
     </div>
  
     <div class="right-content2-detail">
+       <a-locale-provider :locale="zhCN">
       <a-table
         :rowSelection="rowSelection"
         :columns="columns"
         :dataSource="data"
         bordered
-        :pagination="{ pageSize: 10}"
+        :pagination="pagination"
       >
         <template slot="title" class="tixian-title">
           <a-icon type="bars" />
@@ -37,17 +38,29 @@
           <a-icon type="printer" />
         </template>
       </a-table>
+       </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "moneystatistics",
   data() {
     return {
       data: [],
-      columns: []
+      zhCN,
+      columns: [],
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
