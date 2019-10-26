@@ -40,30 +40,110 @@
       </table>
     </div>
     <div class="right-content2-detail">
-      <a-table :columns="columns" :dataSource="data" bordered :pagination="{ pageSize: 10 }">
-        <a slot="11" href="javascript:;">
-          <span class="table-shenhe">审核</span>
-          <span class="table-shenhe">拒绝</span>
-          <span class="table-shenhe">编辑</span>
-          <span class="table-shenhe">转移</span>
-          <span class="table-shenhe">删除</span>
-        </a>
-      </a-table>
+      <a-locale-provider :locale="zhCN">
+        <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
+          <span slot="11">
+            <span class="table-shenhe" @click="showModal('审核')">审核</span>
+            <span class="table-shenhe" @click="showModal('拒绝')">拒绝</span>
+            <span class="table-shenhe" @click="showModal('编辑')">编辑</span>
+            <span class="table-shenhe" @click="showModal('转移')">转移</span>
+            <span class="table-shenhe" @click="showModal('删除')">删除</span>
+          </span>
+        </a-table>
+      </a-locale-provider>
+    </div>
+    <div>
+      <a-locale-provider :locale="zhCN">
+        <a-modal :title="modal" v-model="visible" @ok="handleOk">
+          <div v-show="modal=='编辑'">
+            <div>
+              <p>ID</p>
+              <a-input />
+            </div>
+            <div>
+              <p>商户ID</p>
+              <a-input />
+            </div>
+            <div>
+              <p>店铺名称</p>
+              <a-input />
+            </div>
+            <div>
+              <p>店铺URL</p>
+              <a-input />
+            </div>
+            <div>
+              <p>旺旺名称</p>
+              <a-input />
+            </div>
+            <div>
+              <p>手机号</p>
+              <a-input />
+            </div>
+            <div>
+              <p>地区</p>
+              <a-input />
+            </div>
+            <div>
+              <p>地址</p>
+              <a-input />
+            </div>
+            <div>
+              <p>图片地址</p>
+              <a-input />
+            </div>
+            <div>
+              <p>平台</p>
+              <a-input />
+            </div>
+            <div>
+              <p>审核状态</p>
+              <a-input />
+            </div>
+          </div>
+          <div v-show="modal=='审核'">
+            <p>确定要审核该店铺吗？</p>
+          </div>
+          <div v-show="modal=='拒绝'">
+            <p>请填写审核不通过原因</p>
+            <a-textarea row="6" />
+          </div>
+          <div v-show="modal=='转移'">
+            <p>转移后无法恢复请谨慎操作，请填写转移的商家手机号</p>
+            <a-input />
+          </div>
+          <div v-show="modal=='删除'">
+            <p>确定要删除吗（该操作无法恢复）？</p>
+          </div>
+        </a-modal>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "shopmanagement",
   data() {
     return {
+      zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
-    // 用户管理内容
     this.columns = [
       {
         title: "创建时间",
@@ -127,7 +207,6 @@ export default {
         scopedSlots: { customRender: "11" }
       }
     ];
-    this.data = [];
     for (let i = 0; i < 100; i++) {
       this.data.push({
         1: "2019-10-09 14:21:22",
@@ -152,6 +231,14 @@ export default {
         target[column] = value;
         this.data = newData;
       }
+    },
+    showModal(param) {
+      this.modal = param;
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
     }
   }
 };

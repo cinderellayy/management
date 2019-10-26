@@ -37,7 +37,7 @@
         >
           <div slot="操作">
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
-            <span class="table-shenhe">删除</span>
+            <span class="table-shenhe" @click="showModal('删除')">删除</span>
           </div>
           <img style="width:50px;heigth:50px" slot="4" slot-scope="data" :src="data" />
         </a-table>
@@ -51,13 +51,16 @@
             ID
             <a-input />
           </div>
-          <div>
+          <div v-show="modal!='删除'">
             角色名
             <a-input />
           </div>
           <div v-show="modal=='编辑'">
             创建时间
             <a-input />
+          </div>
+          <div v-show="modal=='删除'">
+            <p>确定要删除吗（该操作无法恢复）？</p>
           </div>
         </a-modal>
       </a-locale-provider>

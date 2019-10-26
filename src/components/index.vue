@@ -1,5 +1,5 @@
 <template>
-  <div class="management">
+  <div class="management scroll">
     <div class="top">
       <p class="top-title color-title">系统后台</p>
       <p class="right">
@@ -129,6 +129,7 @@
             <p :class="{'unit-active':listUnit=='订单管理'}" @click="listUnit='订单管理';add('订单管理')">订单管理</p>
             <p :class="{'unit-active':listUnit=='任务管理'}" @click="listUnit='任务管理';add('任务管理')">任务管理</p>
             <p :class="{'unit-active':listUnit=='用户管理'}" @click="listUnit='用户管理';add('用户管理')">用户管理</p>
+            <p :class="{'unit-active':listUnit=='APP版本控制'}" @click="listUnit='APP版本控制';add('APP版本控制')">APP版本控制</p>
           </div>
         </div>
       </div>
@@ -184,12 +185,16 @@
       <commissionmanagement-data class="right-content2" v-if="activeKey=='佣金明细管理'"></commissionmanagement-data>
       <rechargemanagement-data class="right-content2" v-if="activeKey=='充值管理'"></rechargemanagement-data>
       <!-- 三方管理 -->
-      <substationmanagement-data class="right-content2" v-if="activeKey=='分站管理'"></substationmanagement-data>
+      <substationmanagement-data class="right-content2" @childData="getMsgFormChild" v-if="activeKey=='分站管理'"></substationmanagement-data>
+      <substationchildmanagement-data class="right-content2" v-if="activeKey=='分站价格区间管理'"></substationchildmanagement-data>
       <shopmanagement-data class="right-content2" v-if="activeKey=='店铺管理'"></shopmanagement-data>
       <ordermanagement-data class="right-content2" v-if="activeKey=='订单管理'"></ordermanagement-data>
       <sellermanagement-data class="right-content2" v-if="activeKey=='卖家管理'"></sellermanagement-data>
       <taskmanagement-data class="right-content2" v-if="activeKey=='任务管理'"></taskmanagement-data>
-      <usermanagement-data class="right-content2" v-if="activeKey=='用户管理'"></usermanagement-data>
+      <usermanagement-data class="right-content2" @childData="getMsgFormChild" v-if="activeKey=='用户管理'"></usermanagement-data>
+      <userexamine-data class="right-content2" v-if="activeKey=='用户管理审核'"></userexamine-data>
+      <editioncontrol-data class="right-content2" v-if="activeKey=='APP版本控制'"></editioncontrol-data>
+      
     </div>
     <div class="bottom-content"></div>
   </div>
@@ -235,7 +240,10 @@ import shopmanagementData from "./threePartyManagement/shopManagement";
 import ordermanagementData from "./threePartyManagement/orderManagement";
 import taskmanagementData from "./threePartyManagement/taskManagement";
 import usermanagementData from "./threePartyManagement/userManagement";
-
+import substationchildmanagementData from "./threePartyManagement/substationChildManagement";
+import userexamineData from "./threePartyManagement/userExamine";
+//版本控制
+import editioncontrolData from "./APPEdition/editionControl";
 export default {
   name: "index",
   data() {
@@ -257,7 +265,8 @@ export default {
       newTabIndex: 0,
       panes: [],
       indexColumns: [],
-      indexData: []
+      indexData: [],
+      childData:''
     };
   },
   components: {
@@ -289,7 +298,10 @@ export default {
     shopmanagementData,
     ordermanagementData,
     rechargemanagementData,
-    taskmanagementData
+    taskmanagementData,
+    substationchildmanagementData,
+    userexamineData,
+    editioncontrolData
   },
   mounted() {
     // 右侧菜单
@@ -400,6 +412,11 @@ export default {
         target[column] = value;
         this.data = newData;
       }
+    },
+    getMsgFormChild(data){
+      this.childData = data
+      this.add(data);
+      this.activeKey = data;
     }
   }
 };

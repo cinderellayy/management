@@ -22,31 +22,70 @@
     <div class="guanliyuan-middle">
       <span>总计：{{data.length}}条记录</span>
       <div class="right">
-        <a-button icon="folder-add">添加</a-button>
+        <a-button icon="folder-add" @click="showModal('添加')">添加</a-button>
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-table
-        :columns="columns"
-        :dataSource="data"
-        bordered
-        :pagination="{ pageSize: 8 }"
-      >
-        <img style="width:50px;heigth:50px" slot="11" slot-scope="data" :src="data" />
-        <img style="width:50px;heigth:50px" slot="12" slot-scope="data" :src="data" />
-        <a slot="13" class="table-shenhe mr10">分站价格区间管理</a>
-      </a-table>
+      <a-locale-provider :locale="zhCN">
+        <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
+          <img
+            style="width:50px;heigth:50px"
+            slot="11"
+            slot-scope="data"
+            :src="data"
+             class="pointer"
+            @click="showModal('查看大图')"
+          />
+          <img
+            style="width:50px;heigth:50px"
+            slot="12"
+            slot-scope="data"
+            :src="data"
+            class="pointer"
+            @click="showModal('查看大图')"
+          />
+          <span slot="13" class="table-shenhe mr10" @click="toParent()">分站价格区间管理</span>
+        </a-table>
+      </a-locale-provider>
+    </div>
+    <div>
+      <a-locale-provider :locale="zhCN">
+        <a-modal :title="modal" v-model="visible" @ok="handleOk">
+          <div v-show="modal=='添加'">
+            <p>输入框</p>
+            <a-input />
+          </div>
+          <img
+            v-show="modal=='查看大图'"
+            class="appeal-modal-img"
+            src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=4b1e0ff44da98226accc2375ebebd264/faf2b2119313b07e6a5add8902d7912396dd8c48.jpg"
+          />
+        </a-modal>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "substationmanagement",
   data() {
     return {
+      zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
@@ -151,25 +190,17 @@ export default {
       });
     }
   },
- 
   methods: {
-    handleChange(value, key, column) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target[column] = value;
-        this.data = newData;
-      }
+    toParent() {
+      this.$emit("childData", "分站价格区间管理");
     },
-    upload(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        this.$message.success(`${info.file.name} 上传成功`);
-      } else if (info.file.status === "error") {
-        this.$message.error(`${info.file.name} 上传失败`);
-      }
+    showModal(param) {
+      this.modal = param;
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
     }
   }
 };

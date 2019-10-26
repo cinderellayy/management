@@ -11,11 +11,11 @@
             <span class="top-span">内容</span>
             <a-input />
           </td>
-        
-          <td >
+
+          <td>
             <span class="right">
               <a-button type="primary" icon="search">搜索</a-button>
-              <a-button type="primary" icon="folder-add">添加</a-button>
+              <a-button type="primary" icon="folder-add" @click="showModal('添加')">添加</a-button>
             </span>
           </td>
         </tr>
@@ -29,24 +29,47 @@
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-table
-        :columns="columns"
-        :dataSource="data"
-        bordered
-        :pagination="{ pageSize: 8 }"
-      >
-      </a-table>
+      <a-locale-provider :locale="zhCN">
+        <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination"></a-table>
+      </a-locale-provider>
+    </div>
+    <div>
+      <a-locale-provider :locale="zhCN">
+        <a-modal :title="modal" v-model="visible" @ok="handleOk">
+          <div>
+            <p>类型</p>
+            <a-input />
+          </div>
+          <div>
+            <p>内容</p>
+            <a-input />
+          </div>
+        </a-modal>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "liarstatistics",
   data() {
     return {
+      zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
@@ -75,20 +98,20 @@ export default {
     for (let i = 0; i < 40; i++) {
       this.data.push({
         1: "2019-10-19 16:35:33",
-        2: '身份证号',
-        3: "QW",
+        2: "身份证号",
+        3: "QW"
       });
     }
   },
 
   methods: {
-    handleChange(value, key, column) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target[column] = value;
-        this.data = newData;
-      }
+    showModal(param) {
+      this.modal = param;
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
     },
     upload(info) {
       if (info.file.status !== "uploading") {

@@ -57,7 +57,7 @@
         >
           <div slot="操作">
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
-            <span class="table-shenhe">删除</span>
+            <span class="table-shenhe" @click="showModal('删除')">删除</span>
           </div>
         </a-table>
       </a-locale-provider>
@@ -66,24 +66,29 @@
     <div>
       <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
-          <div>
-            <p>角色ID</p>
-            <a-select defaultValue="0" @change="handleChange" class="w01">
-              <a-select-option value="0">请选择</a-select-option>
-              <a-select-option value="1">浏览单</a-select-option>
-              <a-select-option value="2">垫付单</a-select-option>
-              <a-select-option value="3">预售单</a-select-option>
-            </a-select>
+          <div v-show="modal!='删除'">
+            <div>
+              <p>角色ID</p>
+              <a-select defaultValue="0" @change="handleChange" class="w01">
+                <a-select-option value="0">请选择</a-select-option>
+                <a-select-option value="1">浏览单</a-select-option>
+                <a-select-option value="2">垫付单</a-select-option>
+                <a-select-option value="3">预售单</a-select-option>
+              </a-select>
+            </div>
+            <div>
+              <p>权限ID</p>
+              <a-checkbox-group v-show="modal=='添加'" :options="plainOptions" v-model="checkedList" />
+              <a-select v-show="modal=='编辑'" defaultValue="0" class="w01" @change="handleChange">
+                <a-select-option value="0">请选择</a-select-option>
+                <a-select-option value="1">/admin/Business/transfer</a-select-option>
+                <a-select-option value="2">/admin/Reflect/examine</a-select-option>
+                <a-select-option value="3">/admin/Reflect/examinte</a-select-option>
+              </a-select>
+            </div>
           </div>
-          <div>
-            <p>权限ID</p>
-            <a-checkbox-group v-show="modal=='添加'" :options="plainOptions" v-model="checkedList" />
-            <a-select v-show="modal=='编辑'" defaultValue="0" class="w01" @change="handleChange">
-              <a-select-option value="0">请选择</a-select-option>
-              <a-select-option value="1">/admin/Business/transfer</a-select-option>
-              <a-select-option value="2">/admin/Reflect/examine</a-select-option>
-              <a-select-option value="3">/admin/Reflect/examinte</a-select-option>
-            </a-select>
+          <div v-show="modal=='删除'">
+            <p>确定要删除吗（该操作无法恢复）？</p>
           </div>
         </a-modal>
       </a-locale-provider>

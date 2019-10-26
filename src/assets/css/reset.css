@@ -106,6 +106,9 @@ ul {
 li {
     list-style: none;
 }
+.pointer {
+    cursor: pointer;
+}
 .relative {
     position: relative;
 }
@@ -122,11 +125,17 @@ li {
 .color-blue {
     color: #1824E3;
 }
+.mr0 {
+    margin-right:0 !important;
+}
 .mr8 {
     margin-right:8px;
 }
 .mr10{
     margin-right: 10px;
+}
+.mr20{
+    margin-right: 20px  !important;
 }
 .mr07{
     margin-right: 7%;
@@ -140,8 +149,11 @@ li {
 .mr023{
     margin-right: 23%;
 }
+.mb6{
+    margin-bottom: 6px !important;
+}
 .mb20{
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 .mb-20{
     margin-bottom: -20px;
@@ -174,7 +186,7 @@ li {
     display: inline-block;
 }
 .w01{
-    width: 100%;
+    width: 100%  !important;
 }
 .w060{
     width: 60% !important;
@@ -185,7 +197,7 @@ li {
 /* 滚动条整体部分 */
 .scroll::-webkit-scrollbar,.guanliyuan-top::-webkit-scrollbar,.ant-table-content::-webkit-scrollbar
   {
-  width: 5px;
+  width: 6px;
   height: 8px;
   background-color:#e5f0fe;
 }
@@ -217,4 +229,12 @@ li {
 }
 .bottom-50{
     bottom: -50px !important;
+}
+/* 弹出层 */
+.ant-modal-content{
+    max-height: 600px;
+    overflow-y: auto;
+}
+.ant-table-title{
+    padding-left: 16px;
 }

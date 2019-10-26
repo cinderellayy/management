@@ -92,14 +92,6 @@ export default {
   },
 
   methods: {
-    handleChange(value, key, column) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target[column] = value;
-        this.data = newData;
-      }
-    }
   }
 };
 </script>

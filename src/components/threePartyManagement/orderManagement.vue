@@ -82,33 +82,59 @@
       </div>
     </div>
     <div class="right-content2-detail">
+        <a-locale-provider :locale="zhCN">
       <a-table
         :rowSelection="rowSelection"
         :columns="columns"
         :dataSource="data"
         bordered
-        :pagination="{pageSize: 6}"
+        :pagination="pagination"
       >
-        <img style="width:50px;heigth:50px" slot="16" slot-scope="data" :src="data" />
-        <img style="width:50px;heigth:50px" slot="17" slot-scope="data" :src="data" />
-        <img style="width:50px;heigth:50px" slot="18" slot-scope="data" :src="data" />
-        <img style="width:50px;heigth:50px" slot="19" slot-scope="data" :src="data" />
-        <img style="width:50px;heigth:50px" slot="20" slot-scope="data" :src="data" />
-        <img style="width:50px;heigth:50px" slot="21" slot-scope="data" :src="data" />
-        <img style="width:50px;heigth:50px" slot="22" slot-scope="data" :src="data" />
-        <a slot="25" class="table-shenhe mr10">撤买</a>
+        <img style="width:50px;heigth:50px" slot="16" slot-scope="data" :src="data" class="pointer"  @click="showModal('查看大图')"/>
+        <img style="width:50px;heigth:50px" slot="17" slot-scope="data" :src="data" class="pointer"  @click="showModal('查看大图')"/>
+        <img style="width:50px;heigth:50px" slot="18" slot-scope="data" :src="data" class="pointer"  @click="showModal('查看大图')"/>
+        <img style="width:50px;heigth:50px" slot="19" slot-scope="data" :src="data" class="pointer"  @click="showModal('查看大图')"/>
+        <img style="width:50px;heigth:50px" slot="20" slot-scope="data" :src="data" class="pointer"  @click="showModal('查看大图')"/>
+        <img style="width:50px;heigth:50px" slot="21" slot-scope="data" :src="data" class="pointer"  @click="showModal('查看大图')" />
+        <img style="width:50px;heigth:50px" slot="22" slot-scope="data" :src="data" class="pointer"  @click="showModal('查看大图')"/>
+        <a slot="25" class="table-shenhe mr10"></a>
       </a-table>
+        </a-locale-provider>
+    </div>
+     <div>
+      <a-locale-provider :locale="zhCN">
+        <a-modal :title="modal" v-model="visible" @ok="handleOk">
+          <img
+            v-show="modal=='查看大图'"
+            class="appeal-modal-img"
+            src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=4b1e0ff44da98226accc2375ebebd264/faf2b2119313b07e6a5add8902d7912396dd8c48.jpg"
+          />
+        </a-modal>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "ordermanagement",
   data() {
     return {
+     zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 6, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["6", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
@@ -308,6 +334,14 @@ export default {
         target[column] = value;
         this.data = newData;
       }
+    },
+     showModal(param) {
+      this.modal = param;
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
     }
   }
 };

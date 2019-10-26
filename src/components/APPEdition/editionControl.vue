@@ -6,13 +6,13 @@
         <a-button icon="folder-add" @click="showModal('添加')">添加</a-button>
       </div>
     </div>
-    <div class="right-content2-detail">
+    <div class="right-content2-detail relative">
       <a-locale-provider :locale="zhCN">
         <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
-          <span slot="3">
+          <div slot="7">
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
             <span class="table-shenhe" @click="showModal('删除')">删除</span>
-          </span>
+          </div>
         </a-table>
       </a-locale-provider>
     </div>
@@ -21,11 +21,27 @@
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal!='删除'">
             <div>
-              <p>银行ID</p>
+              <p>ios版本号</p>
               <a-input />
             </div>
             <div>
-              <p>银行名称</p>
+              <p>android版本号</p>
+              <a-input />
+            </div>
+            <div>
+              <p>ios是否强制更新</p>
+              <a-input />
+            </div>
+            <div>
+              <p>android是否强制更新</p>
+              <a-input />
+            </div>
+            <div>
+              <p>ios载链接</p>
+              <a-input />
+            </div>
+            <div>
+              <p>android下载链接</p>
               <a-input />
             </div>
           </div>
@@ -41,7 +57,7 @@
 <script>
 import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
-  name: "bankmanagement",
+  name: "editioncontrol",
   data() {
     return {
       zhCN,
@@ -63,32 +79,79 @@ export default {
   mounted() {
     this.columns = [
       {
-        title: "银行ID",
+        title: "ID",
+        dataIndex: "0",
+
+        scopedSlots: { customRender: "0" }
+      },
+      {
+        title: "ios版本号",
         dataIndex: "1",
 
         scopedSlots: { customRender: "1" }
       },
       {
-        title: "银行名称",
+        title: "android版本号",
         dataIndex: "2",
 
         scopedSlots: { customRender: "2" }
       },
       {
-        title: "操作",
+        title: "ios是否强制更新",
         dataIndex: "3",
-
         scopedSlots: { customRender: "3" }
+      },
+      {
+        title: "android是否强制更新",
+        dataIndex: "4",
+
+        scopedSlots: { customRender: "4" }
+      },
+      {
+        title: "ios载链接",
+        dataIndex: "5",
+
+        scopedSlots: { customRender: "5" }
+      },
+      {
+        title: "android下载链接",
+        dataIndex: "6",
+
+        scopedSlots: { customRender: "6" }
+      },
+      {
+        title: "操作",
+        dataIndex: "7",
+        scopedSlots: { customRender: "7" }
       }
     ];
-    for (let i = 0; i < 30; i++) {
+    this.data = [];
+    for (let i = 0; i < 40; i++) {
       this.data.push({
-        1: `1` + i + "",
-        2: "中国光大银行"
+        0: i + 1,
+        1: "V1.0." + i,
+        2: "V1.0.6" + i,
+        3: "2",
+        4: "2",
+        5: "https://fir.im/r7na",
+        6: "https://fir.im/r7na"
       });
     }
   },
-
+  computed: {
+    rowSelection() {
+      const { selectedRowKeys } = this;
+      return {
+        onChange: (selectedRowKeys, selectedRows) => {},
+        getCheckboxProps: record => ({
+          props: {
+            disabled: record.name === "Disabled User", // Column configuration not to be checked
+            name: record.name
+          }
+        })
+      };
+    }
+  },
   methods: {
     showModal(param) {
       this.modal = param;

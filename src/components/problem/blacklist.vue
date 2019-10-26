@@ -18,28 +18,61 @@
     <div class="guanliyuan-middle">
       <span>总计：{{data.length}}条记录</span>
       <div class="right">
-        <a-button icon="folder-add">添加</a-button>
+        <a-button icon="folder-add" @click="showModal('添加')">添加</a-button>
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-table :columns="columns" :dataSource="data" bordered :pagination="{ pageSize: 10}">
-        <a slot="6" href="javascript:;" class="table-shenhe">删除</a>
-      </a-table>
+      <a-locale-provider :locale="zhCN">
+        <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
+          <a slot="6" href="javascript:;" class="table-shenhe" @click="showModal('删除')">删除</a>
+        </a-table>
+      </a-locale-provider>
+    </div>
+    <div>
+      <a-locale-provider :locale="zhCN">
+        <a-modal :title="modal" v-model="visible" @ok="handleOk">
+          <div v-show="modal!='删除'">
+            <div>
+              <p>违规类别</p>
+              <a-input />
+            </div>
+            <div>
+              <p>拉黑原因</p>
+              <a-input />
+            </div>
+          </div>
+          <div v-show="modal=='删除'">
+            <p>确定要删除吗（该操作无法恢复）？</p>
+          </div>
+        </a-modal>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "blacklist",
   data() {
     return {
+      zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
-    // 用户管理内容
     this.columns = [
       {
         title: "拉黑时间",
@@ -73,11 +106,9 @@ export default {
       {
         title: "操作",
         dataIndex: "6",
-
         scopedSlots: { customRender: "6" }
       }
     ];
-    this.data = [];
     for (let i = 0; i < 30; i++) {
       this.data.push({
         1: "2019-10-09 14:21:22",
@@ -90,13 +121,13 @@ export default {
   },
 
   methods: {
-    handleChange(value, key, column) {
-      const newData = [...this.data];
-      const target = newData.filter(item => key === item.key)[0];
-      if (target) {
-        target[column] = value;
-        this.data = newData;
-      }
+    showModal(param) {
+      this.modal = param;
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
     }
   }
 };

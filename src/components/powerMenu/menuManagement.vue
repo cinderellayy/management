@@ -60,7 +60,7 @@
         >
           <div slot="操作">
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
-            <span class="table-shenhe">删除</span>
+            <span class="table-shenhe" @click="showModal('删除')">删除</span>
           </div>
         </a-table>
       </a-locale-provider>
@@ -69,29 +69,35 @@
     <div>
       <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
-          <div>
-            菜单名称
-            <a-input />
+          <div v-show="modal!='删除'">
+            <div>
+              菜单名称
+              <a-input />
+            </div>
+            <div>
+              菜单排序
+              <a-input />
+            </div>
+            <div>
+              <p>菜单类名</p>
+              <a-select defaultValue="0" @change="handleChange" class="w01">
+                <a-select-option value="0">请选择</a-select-option>
+                <a-select-option value="1">浏览单</a-select-option>
+                <a-select-option value="2">垫付单</a-select-option>
+                <a-select-option value="3">预售单</a-select-option>
+              </a-select>
+            </div>
+            <div>
+              <p>父级菜单ID</p>
+              <a-checkbox-group :options="plainOptions" v-model="checkedList" />
+            </div>
+            <div>
+              <p>菜单权限ID</p>
+              <a-checkbox-group :options="plainOptions" v-model="checkedList" />
+            </div>
           </div>
-          <div>
-            菜单排序
-            <a-input />
-          </div>
-          <div>
-            <p>菜单类名</p>
-            <a-select defaultValue="0" @change="handleChange" class="w01">
-              <a-select-option value="0">请选择</a-select-option>
-              <a-select-option value="1">浏览单</a-select-option>
-              <a-select-option value="2">垫付单</a-select-option>
-              <a-select-option value="3">预售单</a-select-option>
-            </a-select>
-          </div>
-          <div>
-            <p>父级菜单ID</p>
-            <a-checkbox-group :options="plainOptions" v-model="checkedList" />
-          </div>
-          <div>
-            <p>菜单权限ID</p><a-checkbox-group:options="plainOptions" v-model="checkedList" />
+          <div v-show="modal=='删除'">
+            <p>确定要删除吗（该操作无法恢复）？</p>
           </div>
         </a-modal>
       </a-locale-provider>

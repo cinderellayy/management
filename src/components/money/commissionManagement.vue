@@ -22,29 +22,57 @@
     <div class="guanliyuan-middle">
       <span>总计：{{data.length}}条记录</span>
       <div class="right">
-        <a-button icon="folder-add">添加</a-button>
+        <a-button icon="folder-add" @click="showModal('添加')">添加</a-button>
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-table
-        :columns="columns"
-        :dataSource="data"
-        bordered
-        :pagination="{ pageSize: 10 }"
-      >  
-        <a slot="6" class="table-shenhe mr10">编辑</a>
-      </a-table>
+      <a-locale-provider :locale="zhCN">
+        <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
+          <span slot="6" class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
+        </a-table>
+      </a-locale-provider>
+    </div>
+    <div>
+      <a-locale-provider :locale="zhCN">
+        <a-modal :title="modal" v-model="visible" @ok="handleOk">
+          <div>
+            <p>佣金金额</p>
+            <a-input />
+          </div>
+          <div>
+            <p>总金额</p>
+            <a-input />
+          </div>
+          <div>
+            <p>用户名称</p>
+            <a-input />
+          </div>
+        </a-modal>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "commissionmanagement",
   data() {
     return {
+      zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ["10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
@@ -88,15 +116,23 @@ export default {
     this.data = [];
     for (let i = 0; i < 40; i++) {
       this.data.push({
-        1: "12233920"+i,
+        1: "12233920" + i,
         2: "-20.00",
         3: "80.00",
-        4:"张松",
-        5: "2019-01-12 20:12",   
+        4: "张松",
+        5: "2019-01-12 20:12"
       });
     }
   },
   methods: {
+    showModal(param) {
+      this.modal = param;
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
+    }
   }
 };
 </script>

@@ -68,41 +68,99 @@
       <div class="right">
         <a-button>搜索</a-button>
         <a-button>预处理导出</a-button>
-        <a-button>预处理</a-button>
+        <a-button @click="showModal('预处理')">预处理</a-button>
         <a-button>预处理成功</a-button>
         <a-button>导出</a-button>
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-table
-        :rowSelection="rowSelection"
-        :columns="columns"
-        :dataSource="data"
-        bordered
-        :pagination="{ pageSize: 8}"
-      >
-        <template slot="title" class="tixian-title">
-          <a-icon type="bars" />
-          <a-icon type="folder-open" />
-          <a-icon type="printer" />
-        </template>
-        <a slot="审核"  href="javascript:;" class="table-shenhe">审核</a>
-      </a-table>
+      <a-locale-provider :locale="zhCN">
+        <a-table
+          :rowSelection="rowSelection"
+          :columns="columns"
+          :dataSource="data"
+          bordered
+          :pagination="pagination"
+        >
+          <template slot="title" class="tixian-title">
+            <a-icon type="bars" />
+            <a-icon type="folder-open" />
+            <a-icon type="printer" />
+          </template>
+          <span slot="13" class="table-shenhe" @click="showModal('后台提现')">后台提现</span>
+        </a-table>
+      </a-locale-provider>
+    </div>
+    <div>
+      <a-locale-provider :locale="zhCN">
+        <a-modal :title="modal" v-model="visible" @ok="handleOk">
+          <div v-show="modal=='预处理'">
+            <div>
+              <p>银行名称</p>
+              <a-select defaultValue="0" @change="handleChange" class="w01">
+                <a-select-option value="0">请选择</a-select-option>
+                <a-select-option value="1">中国银行</a-select-option>
+                <a-select-option value="2">交通银行</a-select-option>
+                <a-select-option value="3">工商银行</a-select-option>
+              </a-select>
+            </div>
+            <div>
+              <p>请输入提现数量</p>
+              <a-input />
+            </div>
+            <div>
+              <p>打款账号尾号</p>
+              <a-input />
+            </div>
+            <div>
+              <p>预估总金额</p>
+              <a-input />
+            </div>
+          </div>
+          <div v-show="modal=='后台提现'">
+            <div>
+              <p>审核</p>
+              <a-select defaultValue="0" @change="handleChange" class="w01">
+                <a-select-option value="0">请选择</a-select-option>
+                <a-select-option value="1">审核失败</a-select-option>
+                <a-select-option value="2">审核成功</a-select-option>
+                <a-select-option value="3">未审核</a-select-option>
+              </a-select>
+            </div>
+            <div>
+              <p>原因</p>
+              <a-input />
+            </div>
+          </div>
+        </a-modal>
+      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "cashmanagement",
   data() {
     return {
+      zhCN,
       data: [],
-      columns: []
+      columns: [],
+      modal: "编辑",
+      visible: false,
+      pagination: {
+        pageIndex: 1,
+        pageSize: 8, // 默认每页显示数量
+        // showQuickJumper:true,
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ['8',"10", "20", "30", "40"], // 每页数量选项
+        showTotal: total => `共 ${total} 条数据 `, // 显示总数
+        onShowSizeChange: (current, pageSize) => (this.pageSize = pageSize)
+      }
     };
   },
   mounted() {
-    // 用户管理内容
     this.columns = [
       {
         title: "账号",
@@ -172,6 +230,11 @@ export default {
         title: "说明",
         dataIndex: "12",
         scopedSlots: { customRender: "12" }
+      },
+      {
+        title: "操作",
+        dataIndex: "13",
+        scopedSlots: { customRender: "13" }
       }
     ];
     this.data = [];
@@ -214,6 +277,14 @@ export default {
         target[column] = value;
         this.data = newData;
       }
+    },
+    showModal(param) {
+      this.modal = param;
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
     }
   }
 };
