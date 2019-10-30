@@ -12,25 +12,34 @@
     <div class="left-content scroll">
       <div class="left-title">功能菜单</div>
       <div class="left-detail mt40">
-        <p class="list-title" @click="showMenu=!showMenu">系统菜单<img src="../assets/img/menu.jpg" class="folder-icon right" /></p>
+        <p class="list-title" @click="showMenu=!showMenu">
+          系统菜单
+          <img src="../assets/img/menu.jpg" class="folder-icon right" />
+        </p>
         <div v-show="showMenu==true">
           <!-- 用户中心 -->
           <div class="list-unit">
-            <p @click="showUser=!showUser">用户中心<a-icon type="caret-down" class="arrow-icon" />
+            <p @click="showUser=!showUser">
+              用户中心
+              <a-icon type="caret-down" class="arrow-icon" />
             </p>
             <div v-show="showUser==true">
-              <p :class="{'unit-active':listUnit=='用户管理'}" class="pl30"  @click="listUnit='用户管理';add('用户管理','/usermanagement')" >用户管理</p>
-              <p :class="{'unit-active':listUnit=='黑名单管理'}" class="pl30" @click="listUnit='黑名单管理';add('黑名单管理','/blacklist')">黑名单管理</p>
-             
+              <p :class="{'unit-active':listUnit=='usermanagement'}"  class="pl30"  @click="listUnit='usermanagement';add('usermanagement','用户管理')" >用户管理</p>
+              <p :class="{'unit-active':listUnit=='blacklist'}" class="pl30" @click="listUnit='blacklist';add('blacklist','黑名单管理')" >黑名单管理</p>
             </div>
-          
           </div>
-
         </div>
       </div>
     </div>
     <div class="right-content">
-      <a-tabs hideAdd v-model="activeKey" type="editable-card"   @edit="onEdit"  @change="callback"  defaultActiveKey="1"  >
+      <a-tabs
+        hideAdd
+        v-model="activeKey"
+        type="editable-card"
+        @edit="onEdit"
+        @change="callback"
+        defaultActiveKey="1"
+      >
         <a-tab-pane
           v-for="pane in panes"
           :tab="pane.title"
@@ -39,16 +48,14 @@
         >{{pane.content}}</a-tab-pane>
       </a-tabs>
       <div class="right-content2">
-          <router-view></router-view>
+        <router-view></router-view>
       </div>
     </div>
     <div class="bottom-content"></div>
-    
   </div>
 </template>
 
 <script>
-
 export default {
   name: "index",
   data() {
@@ -61,23 +68,23 @@ export default {
       systemSetting: false,
       showDataMsg: false,
       showQuanxian: false,
-      listUnit: "用户管理",
+      listUnit: "usermanagement",
       data: [],
-      targetKey: "用户管理",
+      targetKey: "usermanagement",
       columns: [],
-      activeKey: "用户管理",
+      activeKey: "usermanagement",
       panes: [],
       indexColumns: [],
       indexData: [],
       childData: "",
-      path:''
+      path: ""
     };
   },
 
   mounted() {
     // 右侧菜单
     this.panes = [
-      // { title: "用户管理", content: "", key: "用户管理", closable: false }
+      // { title: "/usermanagement", content: "", key: "/usermanagement", closable: false }
     ];
     // 首页数据
     this.indexColumns = [
@@ -116,24 +123,18 @@ export default {
   methods: {
     callback(targetKey) {
       var _this = this;
-       this.targetKey = targetKey;
-      if(targetKey=='黑名单管理'){
-        this.path='/blacklist'
-      }else if(targetKey=='用户管理'){
-         this.path='/usermanagement'
-      }
       this.$router.push({
-        path:_this.path
-      })
+        path:'/'+ _this.targetKey
+      });
     },
-    add(title,path) {
+    add(path,title) {
       this.path = path;
       this.$router.push({
-        path:path
-      })
+        path: '/'+path
+      });
       const panes = this.panes;
       var flag = 0;
-      const activeKey = title;
+      const activeKey = path;
       panes.forEach(item => {
         if (title === item.title) {
           flag++;
@@ -141,7 +142,7 @@ export default {
         }
       });
       if (flag == 0) {
-        if (title == "用户管理") {
+        if (path == "usermanagement") {
           panes.push({
             title: title,
             content: "",
@@ -179,6 +180,14 @@ export default {
       }
       this.panes = panes;
       this.activeKey = activeKey;
+      // if (activeKey == "黑名单管理") {
+      //   this.path = "/blacklist";
+      // } else if (activeKey == "用户管理") {
+      //   this.path = "/usermanagement";
+      // }
+      this.$router.push({
+        path:'/'+this.activeKey
+      });
     },
     handleChange(value, key, column) {
       const newData = [...this.data];
