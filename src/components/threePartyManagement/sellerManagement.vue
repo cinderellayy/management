@@ -40,7 +40,6 @@
       </table>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table
           :rowSelection="rowSelection"
           :columns="columns"
@@ -70,10 +69,8 @@
             <a-button>更多</a-button>
           </a-popover>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal=='开启'">
             <p>确定要开启自动下架功能吗？</p>
@@ -118,23 +115,18 @@
             <span class="right mb20">
               <a-button type="primary" class="mr0" icon="search">搜索</a-button>
             </span>
-            <a-locale-provider :locale="zhCN">
               <a-table :columns="columnsModal" :dataSource="dataModal" bordered :pagination="false"></a-table>
-            </a-locale-provider>
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "sellermanagement",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       columnsModal: [],

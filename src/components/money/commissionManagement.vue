@@ -26,14 +26,11 @@
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
           <span slot="6" class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div>
             <p>佣金金额</p>
@@ -48,18 +45,15 @@
             <a-input />
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "commissionmanagement",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       modal: "编辑",

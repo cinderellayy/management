@@ -7,17 +7,14 @@
       </div>
     </div>
     <div class="right-content2-detail relative">
-      <a-locale-provider :locale="zhCN">
         <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
           <div slot="7">
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
             <span class="table-shenhe" @click="showModal('删除')">删除</span>
           </div>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal!='删除'">
             <div>
@@ -49,18 +46,15 @@
             <p>确定要删除吗（该操作无法恢复）？</p>
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "editioncontrol",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       modal: "编辑",

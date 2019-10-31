@@ -23,20 +23,16 @@
       <span>垫付单量总计: 20 浏览单量总计: 20</span>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination"></a-table>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "myteam",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       modal: "编辑",

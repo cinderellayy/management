@@ -27,7 +27,6 @@
       </table>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table
           class="mb20"
           :columns="columns"
@@ -51,8 +50,6 @@
           <a-checkbox slot="10"></a-checkbox>
           <span slot="11" class="table-shenhe" @click="showModal('删除')">删除</span>
         </a-table>
-      </a-locale-provider>
-      <a-locale-provider :locale="zhCN">
         <a-table :columns="columnsTwo" :roeKey="0" :dataSource="data" bordered :pagination="false">
           <template slot="title">
             <a-button type="primary">新增搜索字段</a-button>
@@ -66,27 +63,22 @@
           <a-checkbox slot="3">模糊搜索</a-checkbox>
           <span slot="4" class="table-shenhe" @click="showModal('删除')">删除</span>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal=='删除'">
             <p>确定要删除吗（该操作无法恢复）？</p>
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "codegeneration",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       columnsTwo: [],

@@ -1,16 +1,13 @@
 <template>
   <div>
     <div class="right-content2-detail relative">
-      <a-locale-provider :locale="zhCN">
         <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
           <div slot="操作">
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
           </div>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div>
             <p>功能</p>
@@ -21,18 +18,15 @@
             <a-input />
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "systemsetting",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       modal: "编辑",

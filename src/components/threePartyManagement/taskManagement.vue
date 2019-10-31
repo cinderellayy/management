@@ -38,29 +38,24 @@
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
           <img
-            style="width:50px;heigth:50px"
             slot="7"
             slot-scope="data"
             :src="data"
-            class="pointer"
+            class="cell-img"
             @click="showModal('查看大图')"
           />
           <img
-            style="width:50px;heigth:50px"
             slot="21"
             slot-scope="data"
             :src="data"
-             class="pointer"
+             class="cell-img"
             @click="showModal('查看大图')"
           />
           <a slot="40" class="table-shenhe mr10"></a>
         </a-table>
-      </a-locale-provider>
     </div>
-    <a-locale-provider :locale="zhCN">
       <a-modal :title="modal" v-model="visible" @ok="handleOk">
         <div v-show="modal=='添加'">
           <div>
@@ -222,17 +217,14 @@
           src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=4b1e0ff44da98226accc2375ebebd264/faf2b2119313b07e6a5add8902d7912396dd8c48.jpg"
         />
       </a-modal>
-    </a-locale-provider>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "taskmanagement",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       modal: "编辑",

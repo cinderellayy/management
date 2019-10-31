@@ -53,17 +53,14 @@
     </div>
 
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table  :rowSelection="rowSelection" :columns="columns" :dataSource="data" bordered :pagination="pagination">
           <div slot="8"> 
             <span class="table-shenhe mr10"  @click="showModal('查看进度')">查看进度</span> 
             <span class="table-shenhe"  @click="showModal('被申诉统计')">被申诉统计</span> 
           </div>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal=='查看进度'">
           <div class="mb20">
@@ -90,18 +87,15 @@
             <a-table  :columns="columnsModal" :dataSource="dataModal" bordered :pagination="false"> </a-table>
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "appealcenter",
   data() {
     return {
-      zhCN,
       data: [],
       dataModal:[],
       columns: [],

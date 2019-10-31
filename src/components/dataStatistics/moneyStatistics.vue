@@ -24,7 +24,6 @@
     </div>
  
     <div class="right-content2-detail">
-       <a-locale-provider :locale="zhCN">
       <a-table
         :rowSelection="rowSelection"
         :columns="columns"
@@ -38,19 +37,16 @@
           <a-icon type="printer" />
         </template>
       </a-table>
-       </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "moneystatistics",
   data() {
     return {
       data: [],
-      zhCN,
       columns: [],
       pagination: {
         pageIndex: 1,

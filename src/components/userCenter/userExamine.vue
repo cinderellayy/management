@@ -19,7 +19,6 @@
       </a-table>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal=='审核通过'">
             <p>确定审核通过吗？</p>
@@ -103,18 +102,15 @@
             </div>
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "userexamine",
   data() {
     return {
-      zhCN,
       data: [],
       bank: [],
       bankData: [],

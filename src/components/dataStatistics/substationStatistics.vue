@@ -23,7 +23,6 @@
     </div>
 
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table
           :rowSelection="rowSelection"
           :columns="columns"
@@ -38,10 +37,8 @@
           </template>
           <div slot="10" class="table-shenhe" @click="showModal('信息')">提现</div>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div>
             <p>分站名</p>
@@ -56,18 +53,15 @@
             <a-input />
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "substationstatistics",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       modal: "编辑",

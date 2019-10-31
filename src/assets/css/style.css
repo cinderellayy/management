@@ -33,7 +33,7 @@
   width: 200px;
   text-indent: 6px;
   position: absolute;
-  height: 743px;
+  height:800px;
   overflow-y: auto;
 }
 
@@ -112,7 +112,7 @@ table .ant-input-affix-wrapper, table.ant-select {
 .right-content {
   border-left: 1px solid #bdd7f9;
   margin-left: 200px;
-  height: 750px;
+  height: 800px;
   overflow-y: auto;
 }
 
@@ -224,10 +224,14 @@ table .ant-input-affix-wrapper, table.ant-select {
 /* 弹出层图片 */
 
 .appeal-modal-img {
-  width: 200;
-  max-height: 200px;
+  max-height: 600px;
+  width: 100%;
 }
-
+.cell-img{
+  cursor: pointer;
+  max-width: 30px;
+  max-height: 30px;
+}
 /* 屏幕高度小于800像素 */
 
 @media screen and (max-height: 800px) {
@@ -237,4 +241,10 @@ table .ant-input-affix-wrapper, table.ant-select {
   .left-title {
     position: inherit !important;
   }
+}
+@media screen and (max-width: 1780px) {
+.ant-calendar-picker{
+   max-width: 80%;
+   width: inherit;
+}
 }

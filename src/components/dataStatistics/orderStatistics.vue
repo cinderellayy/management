@@ -43,7 +43,6 @@
       <span>单量来源：提交订单号的单数（垫付加浏览）</span>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table
           :rowSelection="rowSelection"
           :columns="columns"
@@ -57,19 +56,16 @@
             <a-icon type="printer" />
           </template>
         </a-table>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "orderstatistics",
   data() {
     return {
       data: [],
-      zhCN,
       columns: [],
       pagination: {
         pageIndex: 1,

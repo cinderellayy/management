@@ -19,7 +19,6 @@
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
           <span slot="4" slot-scope="text">
             {{text}}
@@ -35,10 +34,8 @@
           </span>
           <span class="table-shenhe" slot="9"  @click="showModal('删除')">删除</span>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal=='添加'">
             <p>最低区间值</p>
@@ -68,18 +65,15 @@
             <p>确定要删除吗（该操作无法恢复）？</p>
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "substationchildmanagement",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       columnsModal: [],

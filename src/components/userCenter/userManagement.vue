@@ -107,7 +107,6 @@
       </table>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table
           :columns="columns"
           :roeKey="0"
@@ -130,10 +129,9 @@
             <a-button class="ant-btn"  @click="toParent()">审核</a-button>
           </div>
         </a-table>
-      </a-locale-provider>
+  
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal=='停用'">
             <p>确定要停用该用户么，请填写备注</p>
@@ -174,9 +172,7 @@
             <span class="right mb20">
               <a-button type="primary" class="mr0" icon="search">搜索</a-button>
             </span>
-            <a-locale-provider :locale="zhCN">
               <a-table :columns="columnsModal" :dataSource="dataModal" bordered :pagination="false"></a-table>
-            </a-locale-provider>
           </div>
           <div v-show="modal=='拉黑名单' ">
             <div>
@@ -204,18 +200,16 @@
             <p>确定要清空用户设备码吗？</p>
           </div>
         </a-modal>
-      </a-locale-provider>
+     
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "usermanagement",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       columnsModal: [],
@@ -369,8 +363,8 @@ export default {
     }
   },
   methods: {
-     toParent() {
-      this.$emit("childData", "用户管理审核");
+    toParent() {
+       this.$emit('childData','userexamine',"用户管理审核");
     },
     handleChange(value, key, column) {
       const newData = [...this.data];

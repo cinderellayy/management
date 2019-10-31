@@ -74,7 +74,6 @@
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table
           :rowSelection="rowSelection"
           :columns="columns"
@@ -89,10 +88,8 @@
           </template>
           <span slot="13" class="table-shenhe" @click="showModal('后台提现')">后台提现</span>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal=='预处理'">
             <div>
@@ -133,18 +130,15 @@
             </div>
           </div>
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "cashmanagement",
   data() {
     return {
-      zhCN,
       data: [],
       columns: [],
       modal: "编辑",

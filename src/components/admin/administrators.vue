@@ -50,7 +50,6 @@
       </div>
     </div>
     <div class="right-content2-detail">
-      <a-locale-provider :locale="zhCN">
         <a-table
           :rowSelection="rowSelection"
           :columns="columns"
@@ -63,12 +62,10 @@
             <span class="table-shenhe mr10" @click="showModal('编辑')">编辑</span>
             <span class="table-shenhe" @click="showModal('删除')">删除</span>
           </div>
-          <img style="width:50px;heigth:50px" slot="4" class="pointer" slot-scope="data" :src="data" @click="showModal('查看大图')"/>
+          <img  slot="4" class="cell-img" slot-scope="data" :src="data" @click="showModal('查看大图')"/>
         </a-table>
-      </a-locale-provider>
     </div>
     <div>
-      <a-locale-provider :locale="zhCN">
         <a-modal :title="modal" v-model="visible" @ok="handleOk">
           <div v-show="modal=='编辑' || modal=='添加'">
             <div>
@@ -117,18 +114,15 @@
           <img  class="appeal-modal-img" src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=4b1e0ff44da98226accc2375ebebd264/faf2b2119313b07e6a5add8902d7912396dd8c48.jpg" v-show="modal=='查看大图'">
 
         </a-modal>
-      </a-locale-provider>
     </div>
   </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"; // 汉化
 export default {
   name: "administrators",
   data() {
     return {
-      zhCN,
       visible: false,
       modal: "编辑",
       data: [],
